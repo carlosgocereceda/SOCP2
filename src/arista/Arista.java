@@ -4,7 +4,7 @@ public class Arista {
 
 	private int nodo1;
 	private int nodo2;
-	
+
 	public Arista(int nodo1, int nodo2) {
 		this.nodo1 = nodo1;
 		this.nodo2 = nodo2;
@@ -25,6 +25,17 @@ public class Arista {
 	public void setNodo2(int nodo2) {
 		this.nodo2 = nodo2;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		return o != null &&
+				o instanceof Arista &&
+				( ((Arista) o).nodo1 == this.nodo1 && ((Arista) o).nodo2 == this.nodo2 ||
+				((Arista) o).nodo1 == this.nodo2 && ((Arista) o).nodo2 == this.nodo1);
+	}
 	
-	
+	@Override
+	public String toString() {
+		return this.nodo1 + " " + this.nodo2;
+	}
 }
