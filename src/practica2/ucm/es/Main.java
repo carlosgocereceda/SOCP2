@@ -1,33 +1,30 @@
 package practica2.ucm.es;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-
 import arista.Arista;
+import ficheros.GenerarGephi;
 
 public class Main {
 
-	static long N, p;
+	static long N;
+	static double p;
 	
 	public static void main(String[] args) {	
 		if(args.length < 2) {
 			System.out.println("USO: " + args[0] + " <N> <p>");
 		} else {
 			N = Long.parseLong(args[0]);
-			p = Long.parseLong(args[1]);
+			p = Double.parseDouble(args[1]);
 			
 			System.out.println("N: " + N + "  p: " + p);
 			
-			generarAristas();
+			new GenerarGephi(generarAristas()).generaFicheros();
 		}
 		
 	}
 	
-	public static void generarAristas() {
+	public static List<Arista> generarAristas() {
 		List<Arista> pares = new ArrayList<>();
 		List<Arista> aristas = new ArrayList<>();
 		
@@ -41,11 +38,15 @@ public class Main {
 		
 		System.out.println("Numero de pares: " + pares.size() + " debian ser: " + ((N * (N - 1) ) / 2));
 		
-		System.out.println(pares);
+		for (int i = 0; i < pares.size(); i++) {
+			if(generarRandom(p))
+				aristas.add(pares.get(i));
+		}
+		
+		return aristas;
 	}
-<<<<<<< HEAD
-=======
-	public boolean generarRandom(double p){
+
+	public static boolean generarRandom(double p){
 		double result;
 		result = (Math.random()*1)+ 0;
 		if(result <= p){
@@ -55,6 +56,4 @@ public class Main {
 			return false;
 		}
 	}
-
->>>>>>> 05c5b003cc60a078b651c32bec612ced1deacb19
 }
