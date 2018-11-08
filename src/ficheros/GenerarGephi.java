@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import arista.Arista;
+import practica2.ucm.es.Main;
 
 public class GenerarGephi {
 
@@ -22,16 +23,19 @@ public class GenerarGephi {
 			@SuppressWarnings("resource")
 			PrintWriter pw_nodo = new PrintWriter(nodos);
 			pw_nodo.println("ID");
+			
 			//CREAMOS EL CSV DE LAS ARISTAS
 			FileWriter aristas = new FileWriter("aristas.csv");
 			@SuppressWarnings("resource")
 			PrintWriter pw_aristas = new PrintWriter(aristas);
-			pw_nodo.println("ID");
 			pw_aristas.println("SOURCE	TARGET");
+			
 			for(int i = 0 ; i < red.size(); i ++) {
-				pw_nodo.println(red.get(i).getNodo1());
-				pw_nodo.println(red.get(i).getNodo2());
 				pw_aristas.println(red.get(i).getNodo1() + "	" + red.get(i).getNodo2());
+			}
+			
+			for (int i = 1; i <= Main.N; i++) {
+				pw_nodo.println(i);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -7,8 +7,8 @@ import ficheros.GenerarGephi;
 
 public class Main {
 
-	static long N;
-	static double p;
+	public static long N;
+	public static double p;
 	
 	public static void main(String[] args) {	
 		if(args.length < 2) {
