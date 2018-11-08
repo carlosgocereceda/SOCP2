@@ -43,4 +43,18 @@ public class Main {
 		
 		System.out.println(pares);
 	}
+<<<<<<< HEAD
+=======
+	public boolean generarRandom(double p){
+		double result;
+		result = (Math.random()*1)+ 0;
+		if(result <= p){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+>>>>>>> 05c5b003cc60a078b651c32bec612ced1deacb19
 }
