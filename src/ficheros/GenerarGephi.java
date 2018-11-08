@@ -29,9 +29,9 @@ public class GenerarGephi {
 			pw_nodo.println("ID");
 			pw_aristas.println("SOURCE	TARGET");
 			for(int i = 0 ; i < red.size(); i ++) {
-				pw_nodo.print(red.get(i).getNodo1());
-				pw_nodo.print(red.get(i).getNodo2());
-				pw_aristas.print(red.get(i).getNodo1() + "	" + red.get(i).getNodo2());
+				pw_nodo.println(red.get(i).getNodo1());
+				pw_nodo.println(red.get(i).getNodo2());
+				pw_aristas.println(red.get(i).getNodo1() + "	" + red.get(i).getNodo2());
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
