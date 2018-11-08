@@ -14,5 +14,15 @@ public class Main {
 			System.out.println("N: " + N + "  p: " + p);
 		}
 	}
+	public boolean generarRandom(double p){
+		double result;
+		result = (Math.random()*1)+ 0;
+		if(result <= p){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
 }
