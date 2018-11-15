@@ -35,8 +35,11 @@ public class GenerarBarabasiAlbert {
 	
 	public Red simularRed() {
 		Red red = this.generaRedInicial();
+		Ruleta ruleta = new Ruleta(red);
 		
-		
+		for (int i = 0; i < this.T; i++) {
+			ruleta.barabasi();
+		}
 		
 		return red;
 	}

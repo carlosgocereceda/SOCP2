@@ -24,7 +24,7 @@ public class Ruleta {
 		}
 	}
 
-	public void barabasi(Red red) {
+	public Nodo barabasi() {
 		int denominador = 0;
 		ArrayList<Double> ruleta = new ArrayList<Double>();
 		int k = 0;

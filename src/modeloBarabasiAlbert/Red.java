@@ -1,10 +1,7 @@
 package modeloBarabasiAlbert;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
 import java.util.HashMap;
->>>>>>> 2a57a9db5cb7dd45ec2b7f7a85a52b771330b794
 import java.util.List;
 
 public class Red {
