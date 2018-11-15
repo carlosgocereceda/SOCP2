@@ -1,9 +1,7 @@
-package practica2.ucm.es;
+package modeloAleatorio;
 
 import java.util.ArrayList;
 import java.util.List;
-import arista.Arista;
-import ficheros.GenerarGephi;
 
 public class Main {
 

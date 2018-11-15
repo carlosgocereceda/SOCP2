@@ -1,12 +1,9 @@
-package ficheros;
+package modeloAleatorio;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-
-import arista.Arista;
-import practica2.ucm.es.Main;
 
 public class GenerarGephi {
 

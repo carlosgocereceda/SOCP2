@@ -1,4 +1,4 @@
-package arista;
+package modeloAleatorio;
 
 public class Arista {
 
