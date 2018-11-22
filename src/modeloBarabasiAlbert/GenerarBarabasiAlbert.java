@@ -38,15 +38,15 @@ public class GenerarBarabasiAlbert {
 		Ruleta ruleta = new Ruleta(red);
 		
 		for (int i = 0; i < this.T; i++) {
-			int numEnlacesActual = 0;
-			while(numEnlacesActual <= this.m0) { // Genera m <= m0
-				Nodo n1 = new Nodo(i, 0); // Nodo inicial
-				Nodo n2 = ruleta.barabasi(); // Nodo con el que se enlazara
+			Nodo n1 = red.getNodo(i); // Nuevo nodo
 			
-				// COMPROBAR SI PUEDO FORMAR EL ENLACE
-				
-				red.add(new Arista(n1, n2));
-				numEnlacesActual++;
+			while(n1.getDegree() <= this.M) { // Genera m <= m0 enlaces
+				// Método de selección por ruleta
+				Nodo n2 = ruleta.barabasi();
+			
+				if(!n1.equals(n2)) {
+					red.add(new Arista(n1, n2));
+				}
 			}
 		}
 		

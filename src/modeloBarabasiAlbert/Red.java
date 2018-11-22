@@ -46,6 +46,18 @@ public class Red {
 		this.aristas.add(new Arista(n1, n2));
 	}
 	
+	/**
+	 * Devuelve el nodo de la red SI NO EXISTE lo creara
+	 * @param nodo Nodo de la red
+	 * @return Nodo parte de la red
+	 */
+	public Nodo getNodo(int nodo) {
+		if(!this.nodos.containsKey(nodo))
+			this.nodos.put(nodo, new Nodo(nodo, 0));
+		
+		return this.nodos.get(nodo);
+	}
+	
 	public List<Arista> getAristas() {
 		return aristas;
 	}
