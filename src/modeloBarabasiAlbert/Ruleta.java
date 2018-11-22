@@ -1,13 +1,16 @@
 package modeloBarabasiAlbert;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+
 
 public class Ruleta {
 	
-	private HashMap<Integer, Integer> grados;
-	private Integer denominador;
+	private HashMap<Integer, Integer> grados; //<IDNODO, GARDO>
+	
+	private HashMap<Double, Integer> ruleta; //<FORMULA, IDNODO>
+	private Integer denominador = 0;
 	
 	@SuppressWarnings("unlikely-arg-type")
 	public Ruleta(Red red) {
@@ -24,14 +27,25 @@ public class Ruleta {
 		}
 	}
 
-	public Nodo barabasi() {
-		int denominador = 0;
-		ArrayList<Double> ruleta = new ArrayList<Double>();
-		int k = 0;
-		ruleta.add(k, 0.0);
+	public Integer barabasi() {
+		
+		Double pos = 0.0;
+		
 		for (Map.Entry<Integer, Integer> entry : grados.entrySet()) {
-		    ruleta.add(entry.getKey(), entry.getValue());
+		    pos += entry.getValue() / denominador;
+		    ruleta.put(pos, entry.getKey());
 		}
 		
+		Random r = new Random();
+		Double random = r.nextDouble();
+		
+		for(Map.Entry<Double, Integer> entry : ruleta.entrySet()) {
+			if(random < entry.getKey()) {
+				return entry.getValue();
+			}
+		}
+		return null;
+		
 	}
+	
 }
