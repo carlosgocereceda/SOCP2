@@ -10,7 +10,7 @@ public class Red {
 	
 	public Red(int initialCapacity) {
 		this.aristas = new ArrayList<>(initialCapacity);
-
+		this.nodos = new HashMap<>();
 	}
 	
 	public int numNodos() {
@@ -51,10 +51,14 @@ public class Red {
 	 * @param nodo Nodo de la red
 	 * @return Nodo parte de la red
 	 */
-	public Nodo getNodo(int nodo) {
+	public Nodo getExistingNodo(int nodo) {
 		if(!this.nodos.containsKey(nodo))
 			this.nodos.put(nodo, new Nodo(nodo, 0));
 		
+		return this.nodos.get(nodo);
+	}
+	
+	public Nodo getNodo(int nodo) {
 		return this.nodos.get(nodo);
 	}
 	
@@ -64,5 +68,20 @@ public class Red {
 
 	public void setAristas(List<Arista> aristas) {
 		this.aristas = aristas;
+	}
+	
+	@Override
+	public String toString() {
+		String sOut = "###### NODOS ######" + System.getProperty("line.separator");
+		
+		for (Nodo n : this.nodos.values())
+			sOut += n + System.getProperty("line.separator");
+		
+		sOut = "###### ARISTAS ######" + System.getProperty("line.separator");
+		
+		for (Arista a : this.aristas)
+			sOut += a + System.getProperty("line.separator");
+		
+		return sOut;
 	}
 }

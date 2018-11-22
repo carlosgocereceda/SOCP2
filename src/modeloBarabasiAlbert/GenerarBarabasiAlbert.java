@@ -6,15 +6,11 @@ public class GenerarBarabasiAlbert {
 	private int m0; // Nodos iniciales (todos conectados con todos)
 	private int N; // Numero de nodos
 
-	private EnlacePreferencial enlPref;
-
 	public GenerarBarabasiAlbert(int m, int t) {
 		this.M = m;
 		this.T = t;
 		this.m0 = m + 1;
 		this.N = this.m0 + t;
-
-		this.enlPref = new EnlacePreferencial();
 	}
 
 	private Red generaRedInicial() {
@@ -38,18 +34,29 @@ public class GenerarBarabasiAlbert {
 		Ruleta ruleta = new Ruleta(red);
 		
 		for (int i = 0; i < this.T; i++) {
-			Nodo n1 = red.getNodo(i); // Nuevo nodo
+			Nodo n1 = red.getExistingNodo(i); // Nuevo nodo
 			
 			while(n1.getDegree() <= this.M) { // Genera m <= m0 enlaces
 				// Método de selección por ruleta
-				Nodo n2 = ruleta.barabasi();
-			
-				if(!n1.equals(n2)) {
-					red.add(new Arista(n1, n2));
+				Integer in2 = ruleta.barabasi();
+				Nodo n2 = in2 != null ? red.getNodo(in2.intValue()) : null;
+				
+				if(in2 == null || n2 == null) {
+					System.err.println("ERROR: Ruleta ha generado un nodo: " + in2 + " no existente en la red.");
+					return red; // Salir del error
+				} else {
+					Arista a = new Arista(n1, n2);
+					if(!n1.equals(n2) && !red.contains(a)) {
+						red.add(a);
+					}
 				}
 			}
 		}
 		
 		return red;
+	}
+
+	public int getN() {
+		return N;
 	}
 }

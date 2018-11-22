@@ -1,19 +1,20 @@
 package modeloBarabasiAlbert;
 
 public class Main {
-
-	public static long N;
-	public static double p;
-	
 	public static void main(String[] args) {	
 		if(args.length < 2) {
-			System.out.println("USO: " + args[0] + " <N> <p>");
+			System.out.println("USO: program <m> <t>");
 		} else {
-			N = Long.parseLong(args[0]);
-			p = Double.parseDouble(args[1]);
+			Integer m = Integer.parseInt(args[0]);
+			Integer t = Integer.parseInt(args[1]);
 			
-			System.out.println("N: " + N + "  p: " + p);
+			System.out.println("m: " + m + "  t: " + t);
 			
+			GenerarBarabasiAlbert gen = new GenerarBarabasiAlbert(m.intValue(), t.intValue());
+			
+			Red r = gen.simularRed();
+			
+			System.out.println("Red simulada: " + System.getProperty("line.separator") + r);
 		}	
 	}
 }

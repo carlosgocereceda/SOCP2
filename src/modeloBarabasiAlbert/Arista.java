@@ -36,6 +36,6 @@ public class Arista {
 	
 	@Override
 	public String toString() {
-		return this.nodo1.toString() + " " + this.nodo2.toString();
+		return "(" + this.nodo1.toString() + ", " + this.nodo2.toString() + ")";
 	}
 }

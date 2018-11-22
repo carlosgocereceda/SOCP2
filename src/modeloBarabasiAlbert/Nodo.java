@@ -34,6 +34,6 @@ public class Nodo {
 	
 	@Override
 	public String toString() {
-		return this.value + " " + this.degree;
+		return this.value + " : " + this.degree;
 	}
 }
