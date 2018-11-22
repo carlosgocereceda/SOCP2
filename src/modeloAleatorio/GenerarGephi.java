@@ -34,6 +34,8 @@ public class GenerarGephi {
 			for (int i = 1; i <= Main.N; i++) {
 				pw_nodo.println(i);
 			}
+			pw_aristas.close();
+			pw_nodo.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

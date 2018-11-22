@@ -2,6 +2,7 @@ package modeloAleatorio;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Main {
 
@@ -16,7 +17,6 @@ public class Main {
 			p = Double.parseDouble(args[1]);
 			
 			System.out.println("N: " + N + "  p: " + p);
-			
 			new GenerarGephi(generarAristas()).generaFicheros();
 		}
 		
@@ -36,22 +36,20 @@ public class Main {
 		
 		System.out.println("Numero de pares: " + pares.size() + " debian ser: " + ((N * (N - 1) ) / 2));
 		
+		
+		
 		for (int i = 0; i < pares.size(); i++) {
 			if(generarRandom(p))
 				aristas.add(pares.get(i));
 		}
-		
 		return aristas;
 	}
 
 	public static boolean generarRandom(double p){
-		double result;
-		result = (Math.random()*1)+ 0;
-		if(result <= p){
-			return true;
-		}
-		else{
-			return false;
-		}
+		Double result;
+		Random r= new Random();
+		result = r.nextDouble();
+		
+		return result <= p;
 	}
 }
