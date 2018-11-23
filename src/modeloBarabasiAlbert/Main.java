@@ -15,6 +15,9 @@ public class Main {
 			Red r = gen.simularRed();
 			
 			System.out.println("Red simulada: " + System.getProperty("line.separator") + r);
+			
+			GenerarCSV csv = new GenerarCSV(r, gen.getN());
+			csv.generarFicheros();
 		}	
 	}
 }

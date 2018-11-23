@@ -32,7 +32,7 @@ public class GenerarBarabasiAlbert {
 	public Red simularRed() {
 		Red red = this.generaRedInicial();
 		
-		for (int i = red.numNodos() + 1; i < this.T + this.m0; i++) {
+		for (int i = red.numNodos() + 1; i <= this.T + this.m0; i++) {
 			Nodo n1 = red.getExistingNodo(i); // Nuevo nodo
 
 			while (n1.getDegree() < this.M) { // Genera m <= m0 enlaces
