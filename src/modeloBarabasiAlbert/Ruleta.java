@@ -3,12 +3,13 @@ package modeloBarabasiAlbert;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 public class Ruleta {
 
 	private HashMap<Integer, Integer> grados = new HashMap<>(); // <IDNODO, GRADO>
 
-	private HashMap<Double, Integer> ruleta = new HashMap<>(); // <FORMULA, IDNODO>
+	private Map<Double, Integer> ruleta = new TreeMap<>(); // <FORMULA, IDNODO>
 	private Integer denominador = 0;
 
 	@SuppressWarnings("unlikely-arg-type")
