@@ -70,6 +70,20 @@ public class Red {
 		this.aristas = aristas;
 	}
 	
+	public Nodo getLargestHubDegree() {
+		int max = 0;
+		Nodo nMax = null;
+		
+		for(Nodo n : this.nodos.values()) {
+			if(n.getDegree() > max) {
+				max = n.getDegree();
+				nMax = n;
+			}
+		}
+		
+		return nMax;
+	}
+	
 	@Override
 	public String toString() {
 		String sOut = "###### NODOS ######" + System.getProperty("line.separator");

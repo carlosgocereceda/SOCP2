@@ -1,12 +1,14 @@
 package modeloBarabasiAlbert;
 
 import org.gephi.statistics.plugin.ClusteringCoefficient;
+import org.gephi.statistics.plugin.GraphDensity;
+import org.gephi.statistics.plugin.GraphDistance;
 
 public class Main {
 	public static void main(String[] args) {	
 		if(args.length < 2) {
 			System.out.println("USO: program <m> <t>");
-		} else {
+		} else {			
 			Integer m = Integer.parseInt(args[0]);
 			Integer t = Integer.parseInt(args[1]);
 			
@@ -23,13 +25,22 @@ public class Main {
 			
 			System.out.println("Calcular estadisticas:");
 			
-			Conversor conversor = new Conversor(r);
+			ConversorGephiToolkit conversor = new ConversorGephiToolkit(r);
+			
+			
+			GraphDensity gd = conversor.getDensity();
+			System.out.println("Density: " + gd.getDensity());
+			
+			System.out.println("Largest Hub Degree: " + r.getLargestHubDegree());
+			
+			GraphDistance gdis = conversor.getGraphDistance();
+			System.out.println("Avg. Distance: " + gdis.getPathLength());
 			
 			ClusteringCoefficient cc = conversor.getClusteringCoefficient();
 			System.out.println("Average clustering coefficient: " + cc.getAverageClusteringCoefficient());
 			
 			conversor.export("exportadoConversor.gexf");
 			System.out.println("Exportado:  'exportadoConversor.gexf'");
-		}	
+		}
 	}
 }
