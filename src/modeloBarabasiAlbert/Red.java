@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Red {
-	List<Arista> aristas;
-	HashMap<Integer, Nodo> nodos;
+	protected List<Arista> aristas;
+	protected HashMap<Integer, Nodo> nodos;
 	
 	public Red(int initialCapacity) {
 		this.aristas = new ArrayList<>(initialCapacity);

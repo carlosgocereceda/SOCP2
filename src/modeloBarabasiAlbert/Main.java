@@ -1,5 +1,7 @@
 package modeloBarabasiAlbert;
 
+import org.gephi.statistics.plugin.ClusteringCoefficient;
+
 public class Main {
 	public static void main(String[] args) {	
 		if(args.length < 2) {
@@ -18,6 +20,16 @@ public class Main {
 			
 			GenerarCSV csv = new GenerarCSV(r, gen.getN());
 			csv.generarFicheros();
+			
+			System.out.println("Calcular estadisticas:");
+			
+			Conversor conversor = new Conversor(r);
+			
+			ClusteringCoefficient cc = conversor.getClusteringCoefficient();
+			System.out.println("Average clustering coefficient: " + cc.getAverageClusteringCoefficient());
+			
+			conversor.export("exportadoConversor.gexf");
+			System.out.println("Exportado:  'exportadoConversor.gexf'");
 		}	
 	}
 }
