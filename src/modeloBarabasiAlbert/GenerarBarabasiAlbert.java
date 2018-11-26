@@ -35,7 +35,7 @@ public class GenerarBarabasiAlbert {
 		for (int i = red.numNodos() + 1; i <= this.T + this.m0; i++) {
 			Nodo n1 = red.getExistingNodo(i); // Nuevo nodo
 
-			while (n1.getDegree() < this.M) { // Genera m <= m0 enlaces
+			while (n1.getDegree() <= this.M) { // Genera m <= m0 enlaces
 				Ruleta ruleta = new Ruleta(red);
 				
 				// Método de selección por ruleta
@@ -50,7 +50,7 @@ public class GenerarBarabasiAlbert {
 					if (!n1.equals(n2) && !red.contains(a)) {
 						red.add(a);
 					} else {
-						System.out.println("Ya contenia la arista: " + a);
+						// System.out.println("Ya contenia la arista: " + a);
 					}
 				}
 			}
