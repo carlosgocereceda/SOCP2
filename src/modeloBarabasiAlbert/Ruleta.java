@@ -17,11 +17,11 @@ public class Ruleta {
 		for (int i = 0; i < red.getAristas().size(); i++) {
 			if (!grados.containsKey(red.getAristas().get(i).getNodo1())) {
 				grados.put(red.getAristas().get(i).getNodo1().getValue(),
-						red.getAristas().get(i).getNodo1().getValue());
+						red.getAristas().get(i).getNodo1().getDegree());
 			}
 			if (!grados.containsKey(red.getAristas().get(i).getNodo2())) {
 				grados.put(red.getAristas().get(i).getNodo2().getValue(),
-						red.getAristas().get(i).getNodo2().getValue());
+						red.getAristas().get(i).getNodo2().getDegree());
 			}
 		}
 		for (Map.Entry<Integer, Integer> entry : grados.entrySet()) {
