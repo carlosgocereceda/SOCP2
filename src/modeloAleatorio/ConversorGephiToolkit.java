@@ -1,7 +1,8 @@
-package modeloBarabasiAlbert;
+package modeloAleatorio;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.Graph;
@@ -20,29 +21,32 @@ import org.gephi.statistics.plugin.Degree;
 import org.gephi.statistics.plugin.GraphDensity;
 import org.gephi.statistics.plugin.GraphDistance;
 import org.openide.util.Lookup;
+
 import org.gephi.graph.api.Node;
+import org.gephi.graph.api.UndirectedGraph;
 import org.gephi.graph.impl.GraphModelImpl;
 
 public class ConversorGephiToolkit {
 	public GraphModel graphModel;
 	public Graph graph;
+	private Degree degree = null;
 
-	public ConversorGephiToolkit(Red r) {
+	public ConversorGephiToolkit(List<Arista> r) {
 		this.graphModel = new GraphModelImpl();
 		
 		// Convert a Red to a GraphModel just adding the nodes and edges to the empty
 		this.graph = this.graphModel.getUndirectedGraph();
 
-		for (Arista a : r.aristas) {
-			Node n1 = this.graph.getNode(Integer.toString(a.getNodo1().getValue()));
+		for (Arista a : r) {
+			Node n1 = this.graph.getNode(Integer.toString(a.getNodo1()));
 			if (n1 == null) {
-				n1 = graphModel.factory().newNode(Integer.toString(a.getNodo1().getValue()));
+				n1 = graphModel.factory().newNode(Integer.toString(a.getNodo1()));
 				this.graph.addNode(n1);
 			}
 
-			Node n2 = this.graph.getNode(Integer.toString(a.getNodo2().getValue()));
+			Node n2 = this.graph.getNode(Integer.toString(a.getNodo2()));
 			if (n2 == null) {
-				n2 = graphModel.factory().newNode(Integer.toString(a.getNodo2().getValue()));
+				n2 = graphModel.factory().newNode(Integer.toString(a.getNodo2()));
 				this.graph.addNode(n2);
 			}
 
@@ -100,10 +104,12 @@ public class ConversorGephiToolkit {
 	}
 
 	public Degree getDegree() {
-		Degree degree = new Degree();
-		degree.execute(this.graph);
+		if(this.degree == null)
+			this.degree = new Degree();
+		
+		this.degree.execute(this.graph);
 
-		return degree;
+		return this.degree;
 	}
 	
 	public GraphDensity getDensity() {
@@ -116,6 +122,23 @@ public class ConversorGephiToolkit {
 		ConnectedComponents ccomp = new ConnectedComponents();
 		ccomp.execute(this.graphModel);
 		return ccomp;
+	}
+	
+	public int getLargestHubDegree() {
+		if(this.degree == null)
+			this.getDegree();
+		
+		UndirectedGraph uGraph = this.graphModel.getUndirectedGraph();
+		int maxDegree = 0;
+		
+		for(Node n : uGraph.getNodes()) {
+			int d = uGraph.getDegree(n);
+			
+			if(d > maxDegree)
+				maxDegree = d;
+		}
+		
+		return maxDegree;
 	}
 
 	public void export(String pathname) {

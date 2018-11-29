@@ -24,8 +24,8 @@ public class GenerarBarabasiAlbert {
 				}
 			}
 		}
-		System.out.println("Red inicial creada con " + red.numNodos() + " nodos y " + red.numAristas() + " aristas."
-				+ System.getProperty("line.separator") + red);
+		// System.out.println("Red inicial creada con " + red.numNodos() + " nodos y " + red.numAristas() + " aristas."
+		//		+ System.getProperty("line.separator") + red);
 		return red;
 	}
 
