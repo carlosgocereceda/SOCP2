@@ -58,14 +58,22 @@ public class ConversorGephiToolkit {
 					
 					Edge e = this.graph.getEdge(n1, n2);
 					Edge e2 = this.graph.getEdge(n2, n1);
-					Edge eN = graphModel.factory().newEdge(n1, n2, false);
+					
 					
 					if(( (e != null && !this.graph.contains(e)) || e == null)
 							&& (e2 != null && !this.graph.contains(e2) || e2 == null)) {
-						this.graph.addEdge(eN);
+						if(e == null && e2 == null) {
+							e = graphModel.factory().newEdge(n1, n2, false);
+							this.graph.addEdge(e);
+						} else if(e != null) {
+							this.graph.addEdge(e);
+						} else {
+							e = e2;
+							this.graph.addEdge(e2);
+						}
 						
 						if(!Main.generarRandom(Main.p))
-							edgesToRemove.add(eN);
+							edgesToRemove.add(e);
 					}
 				}
 			}
@@ -102,13 +110,46 @@ public class ConversorGephiToolkit {
 				this.graph.addNode(n2);
 			}
 
-			Edge e = graphModel.factory().newEdge(n1, n2, false);
-
+			Edge e = graph.getEdge(n1, n2);
+			e = e == null ? graphModel.factory().newEdge(n1, n2, false) : e;
+			
 			if (!this.graph.contains(e))
 				this.graph.addEdge(e);
 
 		}
 
+		this.numAristas = this.graph.getEdgeCount();
+		this.graphModel = this.graph.getModel();
+	}
+	
+	public ConversorGephiToolkit(Set<Arista> r) {
+		this.graphModel = new GraphModelImpl();
+
+		// Convert a Red to a GraphModel just adding the nodes and edges to the empty
+		this.graph = this.graphModel.getUndirectedGraph();
+
+		for (Arista a : r) {
+			Node n1 = this.graph.getNode(Integer.toString(a.getNodo1()));
+			if (n1 == null) {
+				n1 = graphModel.factory().newNode(Integer.toString(a.getNodo1()));
+				this.graph.addNode(n1);
+			}
+
+			Node n2 = this.graph.getNode(Integer.toString(a.getNodo2()));
+			if (n2 == null) {
+				n2 = graphModel.factory().newNode(Integer.toString(a.getNodo2()));
+				this.graph.addNode(n2);
+			}
+
+			Edge e = graph.getEdge(n1, n2);
+			e = e == null ? graphModel.factory().newEdge(n1, n2, false) : e;
+			
+			if (!this.graph.contains(e))
+				this.graph.addEdge(e);
+
+		}
+
+		this.numAristas = this.graph.getEdgeCount();
 		this.graphModel = this.graph.getModel();
 	}
 

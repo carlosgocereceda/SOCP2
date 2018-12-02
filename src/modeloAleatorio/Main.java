@@ -1,8 +1,10 @@
 package modeloAleatorio;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import org.gephi.statistics.plugin.ClusteringCoefficient;
 import org.gephi.statistics.plugin.GraphDensity;
@@ -25,7 +27,7 @@ public class Main {
 			simular(10, false);
 			
 			// Exportar un ejemplo
-			new GenerarGephi(generarAristas()).generaFicheros();
+			new GenerarGephi(generarSetAristas()).generaFicheros();
 		}
 	}
 	
@@ -35,7 +37,7 @@ public class Main {
 		System.out.println("Comenzando la simulacion de una red aleatoria de N = " + N + " y p =" + p);
 
 		for (int i = 0; i < iteraciones; i++) {
-			ConversorGephiToolkit conversor = new ConversorGephiToolkit();
+			ConversorGephiToolkit conversor = new ConversorGephiToolkit(generarSetAristas());
 
 			GraphDensity gd = conversor.getDensity();
 			GraphDistance gdis = conversor.getGraphDistance();
@@ -93,14 +95,15 @@ public class Main {
 		System.out.println("Connected components: " + avgConnectedComponents);
 	}
 	
-	public static List<Arista> generarAristas() {
-		List<Arista> pares = new ArrayList<>();
-		List<Arista> aristas = new ArrayList<>();
+	public static Set<Arista> generarSetAristas() {
+		Set<Arista> pares = new HashSet<Arista>();
+		Set<Arista> aristas = new HashSet<Arista>();
 		
 		for (int i = 1; i <= N; i++) {
 			for (int j = 1; j <= N; j++) {
 				Arista a = new Arista(i, j);
-				if(!pares.contains(a) && i != j)
+				Arista a2 = new Arista(j, i);
+				if(i != j && !pares.contains(a) && !pares.contains(a2))
 					pares.add(a);
 			}
 		}
@@ -108,10 +111,11 @@ public class Main {
 		if(pares.size() != ((N * (N - 1) ) / 2))
 			System.out.println("Numero de pares: " + pares.size() + " debian ser: " + ((N * (N - 1) ) / 2));
 		
-		for (int i = 0; i < pares.size(); i++) {
+		for (Arista a : pares) {
 			if(generarRandom(p))
-				aristas.add(pares.get(i));
+				aristas.add(a);
 		}
+		
 		return aristas;
 	}
 

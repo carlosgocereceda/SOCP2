@@ -38,4 +38,10 @@ public class Arista {
 	public String toString() {
 		return this.nodo1 + " " + this.nodo2;
 	}
+	
+	@Override
+	public int hashCode() {
+		String s = Integer.toString(this.nodo1) + Integer.toString(this.nodo2);
+		return Integer.parseInt(s); 
+	}
 }

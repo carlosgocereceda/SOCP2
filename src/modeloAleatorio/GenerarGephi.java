@@ -3,14 +3,14 @@ package modeloAleatorio;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.Set;
 
 public class GenerarGephi {
 
-	private List<Arista> red;
+	private Set<Arista> red;
 	
 	
-	public GenerarGephi(List<Arista> red) {
+	public GenerarGephi(Set<Arista> red) {
 		this.red = red;
 	}
 	public void generaFicheros() {
@@ -27,8 +27,8 @@ public class GenerarGephi {
 			PrintWriter pw_aristas = new PrintWriter(aristas);
 			pw_aristas.println("SOURCE	TARGET");
 			
-			for(int i = 0 ; i < red.size(); i ++) {
-				pw_aristas.println(red.get(i).getNodo1() + "	" + red.get(i).getNodo2());
+			for(Arista a: red) {
+				pw_aristas.println(a.getNodo1() + "	" + a.getNodo2());
 			}
 			
 			for (int i = 1; i <= Main.N; i++) {
