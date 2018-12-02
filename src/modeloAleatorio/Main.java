@@ -43,7 +43,7 @@ public class Main {
 			GraphDistance gdis = conversor.getGraphDistance();
 			ClusteringCoefficient cc = conversor.getClusteringCoefficient();
 
-			Estadisticas e = new Estadisticas(aristas.size(), gd.getDensity(), conversor.getLargestHubDegree(), conversor.getShortestHubDegree(),gdis.getPathLength(),
+			Estadisticas e = new Estadisticas(aristas.size(), gd.getDensity(), conversor.getShortestHubDegree(), conversor.getLargestHubDegree(),gdis.getPathLength(),
 					cc.getAverageClusteringCoefficient(),
 					conversor.getDegree().getAverageDegree(),
 					conversor.getConnectedComponents().getConnectedComponentsCount());
