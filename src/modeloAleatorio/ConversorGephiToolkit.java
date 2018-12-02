@@ -140,6 +140,23 @@ public class ConversorGephiToolkit {
 		
 		return maxDegree;
 	}
+	
+	public int getShortestHubDegree() {
+		if(this.degree == null)
+			this.getDegree();
+		
+		UndirectedGraph uGraph = this.graphModel.getUndirectedGraph();
+		int minDegree = 2147483647; // Max int
+		
+		for(Node n : uGraph.getNodes()) {
+			int d = uGraph.getDegree(n);
+			
+			if(d < minDegree)
+				minDegree = d;
+		}
+		
+		return minDegree;
+	}
 
 	public void export(String pathname) {
 		// Export full graph

@@ -46,7 +46,7 @@ public class Main {
 			GraphDistance gdis = conversor.getGraphDistance();
 			ClusteringCoefficient cc = conversor.getClusteringCoefficient();
 
-			estadisticas.add(new Estadisticas(aristas.size(), gd.getDensity(), conversor.getLargestHubDegree(), gdis.getPathLength(),
+			estadisticas.add(new Estadisticas(aristas.size(), gd.getDensity(), conversor.getLargestHubDegree(), conversor.getShortestHubDegree(),gdis.getPathLength(),
 					cc.getAverageClusteringCoefficient(),
 					conversor.getDegree().getAverageDegree(),
 					conversor.getConnectedComponents().getConnectedComponentsCount()));
@@ -57,7 +57,7 @@ public class Main {
 			System.out.println("Simulacion numero: " + (i + 1) + " terminada.");
 		}
 		
-		double sNumAristas = 0, avgNumAristas = 0, sDensity = 0, avgDensity = 0, sAvgDistance = 0, avgDistance = 0, sAvgClustCoefficient = 0, avgClustCoefficient = 0, sLargestHubDegree = 0, avgLargestHubDegree = 0,
+		double sNumAristas = 0, avgNumAristas = 0, sDensity = 0, avgDensity = 0, sAvgDistance = 0, avgDistance = 0, sAvgClustCoefficient = 0, avgClustCoefficient = 0, sLargestHubDegree = 0, avgLargestHubDegree = 0, sShortestHubDegree = 0, avgShortestHubDegree = 0,
 				sAvgDegree = 0, avgDegree = 0, sConnectedComponents = 0, avgConnectedComponents = 0;
 		
 		for (Estadisticas e : estadisticas) {
@@ -68,6 +68,7 @@ public class Main {
 			sAvgClustCoefficient += e.getAvgClustCoefficient();
 			sAvgDegree += e.getAvgDegree();
 			sConnectedComponents += e.getConnectedComponents();
+			sShortestHubDegree += e.getShortestHubDegree();
 		}
 		
 		avgNumAristas = sNumAristas / iteraciones;
@@ -77,10 +78,12 @@ public class Main {
 		avgClustCoefficient = sAvgClustCoefficient / iteraciones;
 		avgDegree = sAvgDegree / iteraciones;
 		avgConnectedComponents = sConnectedComponents / iteraciones;
+		avgShortestHubDegree = sShortestHubDegree / iteraciones;
 		
 		System.out.println("Num. Aristas: " + avgNumAristas);
 		System.out.println("Density: " + avgDensity);
 		System.out.println("Largest Hub Degree: " + avgLargestHubDegree);
+		System.out.println("Shortest Hub Degree: " + avgShortestHubDegree);
 		System.out.println("Avg. Distance: " + avgDistance);			
 		System.out.println("Average clustering coefficient: " + avgClustCoefficient);
 		System.out.println("Degree: " + avgDegree);

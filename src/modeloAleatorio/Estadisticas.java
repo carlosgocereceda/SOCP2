@@ -3,18 +3,20 @@ package modeloAleatorio;
 public class Estadisticas {
 	private double density;
 	private int largestHubDegree;
+	private int shortestHubDegree;
 	private double avgDistance;
 	private double avgClustCoefficient;
 	private int numAristas;
 	private double avgDegree;
 	private int connectedComponents;
 	
-	public Estadisticas(int numAristas, double density,
+	public Estadisticas(int numAristas, double density, int shortesHubDegree,
 			int largestHubDegree, double avgDistance, double avgClustCoefficient,
 			double avgDegree, int connectedComponents) {
 		this.numAristas = numAristas;
 		this.density = density;
 		this.largestHubDegree = largestHubDegree;
+		this.shortestHubDegree = shortesHubDegree;
 		this.avgDistance = avgDistance;
 		this.avgClustCoefficient = avgClustCoefficient;
 		this.avgDegree = avgDegree;
@@ -75,5 +77,13 @@ public class Estadisticas {
 
 	public void setConnectedComponents(int connectedComponents) {
 		this.connectedComponents = connectedComponents;
+	}
+
+	public int getShortestHubDegree() {
+		return shortestHubDegree;
+	}
+
+	public void setShortestHubDegree(int shortestHubDegree) {
+		this.shortestHubDegree = shortestHubDegree;
 	}
 }
