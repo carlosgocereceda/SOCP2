@@ -15,7 +15,7 @@ public class Main {
 	
 	public static void main(String[] args) {	
 		if(args.length < 2) {
-			System.out.println("USO: " + args[0] + " <N> <p>");
+			System.out.println("USO: program <N> <p>");
 		} else {
 			N = Long.parseLong(args[0]);
 			p = Double.parseDouble(args[1]);
@@ -35,23 +35,18 @@ public class Main {
 		System.out.println("Comenzando la simulacion de una red aleatoria de N = " + N + " y p =" + p);
 
 		for (int i = 0; i < iteraciones; i++) {
-			List<Arista> aristas = generarAristas();
-			
-			ConversorGephiToolkit conversor = new ConversorGephiToolkit(aristas);
+			ConversorGephiToolkit conversor = new ConversorGephiToolkit();
 
 			GraphDensity gd = conversor.getDensity();
 			GraphDistance gdis = conversor.getGraphDistance();
 			ClusteringCoefficient cc = conversor.getClusteringCoefficient();
 
-			Estadisticas e = new Estadisticas(aristas.size(), gd.getDensity(), conversor.getShortestHubDegree(), conversor.getLargestHubDegree(),gdis.getPathLength(),
+			Estadisticas e = new Estadisticas(conversor.getNumAristas(), gd.getDensity(), conversor.getShortestHubDegree(), conversor.getLargestHubDegree(),gdis.getPathLength(),
 					cc.getAverageClusteringCoefficient(),
 					conversor.getDegree().getAverageDegree(),
 					conversor.getConnectedComponents().getConnectedComponentsCount());
 			
 			estadisticas.add(e);
-			
-			if(generaGephi)
-				new GenerarGephi(aristas).generaFicheros();
 			
 			System.out.println(System.getProperty("line.separator") + "Simulacion numero: " + (i + 1) + " terminada:");
 			System.out.println("Num. Aristas: " + e.getNumAristas());
