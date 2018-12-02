@@ -22,14 +22,11 @@ public class Main {
 			
 			System.out.println("N: " + N + "  p: " + p);
 			
-			
 			simular(10, false);
 			
 			// Exportar un ejemplo
 			new GenerarGephi(generarAristas()).generaFicheros();
 		}
-		
-		
 	}
 	
 	public static void simular(int iteraciones, boolean generaGephi) {
@@ -46,15 +43,25 @@ public class Main {
 			GraphDistance gdis = conversor.getGraphDistance();
 			ClusteringCoefficient cc = conversor.getClusteringCoefficient();
 
-			estadisticas.add(new Estadisticas(aristas.size(), gd.getDensity(), conversor.getLargestHubDegree(), conversor.getShortestHubDegree(),gdis.getPathLength(),
+			Estadisticas e = new Estadisticas(aristas.size(), gd.getDensity(), conversor.getLargestHubDegree(), conversor.getShortestHubDegree(),gdis.getPathLength(),
 					cc.getAverageClusteringCoefficient(),
 					conversor.getDegree().getAverageDegree(),
-					conversor.getConnectedComponents().getConnectedComponentsCount()));
+					conversor.getConnectedComponents().getConnectedComponentsCount());
+			
+			estadisticas.add(e);
 			
 			if(generaGephi)
 				new GenerarGephi(aristas).generaFicheros();
 			
-			System.out.println("Simulacion numero: " + (i + 1) + " terminada.");
+			System.out.println(System.getProperty("line.separator") + "Simulacion numero: " + (i + 1) + " terminada:");
+			System.out.println("Num. Aristas: " + e.getNumAristas());
+			System.out.println("Density: " + e.getDensity());
+			System.out.println("Largest Hub Degree: " + e.getLargestHubDegree());
+			System.out.println("Shortest Hub Degree: " + e.getShortestHubDegree());
+			System.out.println("Avg. Distance: " + e.getAvgDistance());			
+			System.out.println("Average clustering coefficient: " + e.getAvgClustCoefficient());
+			System.out.println("Degree: " + e.getAvgDegree());
+			System.out.println("Connected components: " + e.getConnectedComponents());
 		}
 		
 		double sNumAristas = 0, avgNumAristas = 0, sDensity = 0, avgDensity = 0, sAvgDistance = 0, avgDistance = 0, sAvgClustCoefficient = 0, avgClustCoefficient = 0, sLargestHubDegree = 0, avgLargestHubDegree = 0, sShortestHubDegree = 0, avgShortestHubDegree = 0,
@@ -80,6 +87,7 @@ public class Main {
 		avgConnectedComponents = sConnectedComponents / iteraciones;
 		avgShortestHubDegree = sShortestHubDegree / iteraciones;
 		
+		System.out.println("######## RESULTADO FINAL ##########");
 		System.out.println("Num. Aristas: " + avgNumAristas);
 		System.out.println("Density: " + avgDensity);
 		System.out.println("Largest Hub Degree: " + avgLargestHubDegree);
