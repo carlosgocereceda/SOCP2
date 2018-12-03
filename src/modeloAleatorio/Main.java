@@ -100,7 +100,7 @@ public class Main {
 		Set<Arista> aristas = new HashSet<Arista>();
 		
 		for (int i = 1; i <= N; i++) {
-			for (int j = 1; j <= N; j++) {
+			for (int j = i + 1; j <= N; j++) {
 				Arista a = new Arista(i, j);
 				Arista a2 = new Arista(j, i);
 				if(i != j && !pares.contains(a) && !pares.contains(a2))
