@@ -17,9 +17,14 @@ public class Main {
 			Integer t = Integer.parseInt(args[1]);
 
 			System.out.println("m: " + m + "  t: " + t);
-
+			
 			simular(m, t, 100);
-			// conversor.export("exportadoConversor.gexf");
+			
+			GenerarBarabasiAlbert gen = new GenerarBarabasiAlbert(m, t);
+			Red r = gen.simularRed();
+			ConversorGephiToolkit conversor = new ConversorGephiToolkit(r);
+			conversor.export("exportadoConversor.gexf");
+			System.out.println("Exportado:  'exportadoConversor.gexf'");
 		}
 	}
 
