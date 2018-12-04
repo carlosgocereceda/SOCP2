@@ -12,7 +12,6 @@ public class Ruleta {
 	private Map<Double, Integer> ruleta = new TreeMap<>(); // <FORMULA, IDNODO>
 	private Integer denominador = 0;
 
-	@SuppressWarnings("unlikely-arg-type")
 	public Ruleta(Red red) {
 		for (int i = 0; i < red.getAristas().size(); i++) {
 			if (!grados.containsKey(red.getAristas().get(i).getNodo1())) {

@@ -24,14 +24,14 @@ public class Main {
 			
 			System.out.println("N: " + N + "  p: " + p);
 			
-			simular(10, false);
+			simular(10);
 			
 			// Exportar un ejemplo
 			new GenerarGephi(generarSetAristas()).generaFicheros();
 		}
 	}
 	
-	public static void simular(int iteraciones, boolean generaGephi) {
+	public static void simular(int iteraciones) {
 		List<Estadisticas> estadisticas = new ArrayList<>();
 
 		System.out.println("Comenzando la simulacion de una red aleatoria de N = " + N + " y p =" + p);

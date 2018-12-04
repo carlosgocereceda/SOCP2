@@ -17,13 +17,11 @@ public class GenerarGephi {
 		try {
 			//CREAMOS EL CSV DE LOS NODOS
 			FileWriter nodos = new FileWriter("nodos.csv");
-			@SuppressWarnings("resource")
 			PrintWriter pw_nodo = new PrintWriter(nodos);
 			pw_nodo.println("ID");
 			
 			//CREAMOS EL CSV DE LAS ARISTAS
 			FileWriter aristas = new FileWriter("aristas.csv");
-			@SuppressWarnings("resource")
 			PrintWriter pw_aristas = new PrintWriter(aristas);
 			pw_aristas.println("SOURCE	TARGET");
 			
