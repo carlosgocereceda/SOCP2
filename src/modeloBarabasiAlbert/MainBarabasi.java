@@ -7,7 +7,7 @@ import org.gephi.statistics.plugin.ClusteringCoefficient;
 import org.gephi.statistics.plugin.GraphDensity;
 import org.gephi.statistics.plugin.GraphDistance;
 
-public class Main {
+public class MainBarabasi {
 
 	public static void main(String[] args) {
 		if (args.length < 2) {

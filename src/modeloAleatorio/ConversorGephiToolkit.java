@@ -41,14 +41,14 @@ public class ConversorGephiToolkit {
 		this.graph = this.graphModel.getUndirectedGraph();
 		Set<Edge> edgesToRemove = new HashSet<>();
 
-		for (int i = 1; i <= Main.N; i++) {
+		for (int i = 1; i <= MainAleatorio.N; i++) {
 			Node n1 = this.graph.getNode(Integer.toString(i));
 			if (n1 == null) {
 				n1 = graphModel.factory().newNode(Integer.toString(i));
 				this.graph.addNode(n1);
 			}
 
-			for (int j = 1; j <= Main.N; j++) {
+			for (int j = 1; j <= MainAleatorio.N; j++) {
 				if (i != j) {
 					Node n2 = this.graph.getNode(Integer.toString(j));
 					if (n2 == null) {
@@ -72,7 +72,7 @@ public class ConversorGephiToolkit {
 							this.graph.addEdge(e2);
 						}
 						
-						if(!Main.generarRandom(Main.p))
+						if(!MainAleatorio.generarRandom(MainAleatorio.p))
 							edgesToRemove.add(e);
 					}
 				}
@@ -85,8 +85,8 @@ public class ConversorGephiToolkit {
 		
 		this.numAristas = this.graph.getEdgeCount();
 		
-		if(this.numPares != ((Main.N * (Main.N - 1) ) / 2))
-			System.out.println("Numero de pares: " + this.numPares + " debian ser: " + ((Main.N * (Main.N - 1) ) / 2));
+		if(this.numPares != ((MainAleatorio.N * (MainAleatorio.N - 1) ) / 2))
+			System.out.println("Numero de pares: " + this.numPares + " debian ser: " + ((MainAleatorio.N * (MainAleatorio.N - 1) ) / 2));
 		
 		this.graphModel = this.graph.getModel();
 	}
