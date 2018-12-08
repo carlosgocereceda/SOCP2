@@ -10,8 +10,6 @@ import org.gephi.statistics.plugin.ClusteringCoefficient;
 import org.gephi.statistics.plugin.GraphDensity;
 import org.gephi.statistics.plugin.GraphDistance;
 
-import modeloAleatorio.AleatorioPanel;
-
 public class MainBarabasi {
 	private static JFrame frame;
 	private static BarabasiPanel panel;
@@ -103,7 +101,19 @@ public class MainBarabasi {
 		avgLargestHubDegree = sLargestHubDegree / iteraciones;
 		avgDistance = sAvgDistance / iteraciones;
 		avgClustCoefficient = sAvgClustCoefficient / iteraciones;
-		
+		String info = "TOTAL";
+		panel.escribe(info);
+		info = "Num. Aristas: " + avgNumAristas;
+		panel.escribe(info);
+		info = "Density: " + avgDensity;
+		panel.escribe(info);
+		info = "Largest Hub Degree: " + avgLargestHubDegree;
+		panel.escribe(info);
+		info = "Avg. Distance: " + avgDistance;
+		panel.escribe(info);
+		info = "Average clustering coefficient: " + avgClustCoefficient;
+		panel.escribe(info);
+		frame.update(frame.getGraphics());
 		System.out.println("Num. Aristas: " + avgNumAristas);
 		System.out.println("Density: " + avgDensity);
 		System.out.println("Largest Hub Degree: " + avgLargestHubDegree);

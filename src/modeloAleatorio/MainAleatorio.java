@@ -88,6 +88,7 @@ public class MainAleatorio {
 			info = "Connected components: " + e.getConnectedComponents();
 			panel.escribe(info);
 			frame.repaint();
+			frame.update(frame.getGraphics());
 			System.out.println(System.getProperty("line.separator") + "Simulacion numero: " + (i + 1) + " terminada:");
 			System.out.println("Num. Aristas: " + e.getNumAristas());
 			System.out.println("Density: " + e.getDensity());
