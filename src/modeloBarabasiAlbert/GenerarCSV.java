@@ -14,15 +14,15 @@ public class GenerarCSV {
 		this.n = n;
 	}
 	
-	public void generarFicheros() {
+	public void generarFicheros(int it) {
 		try {
 			//CREAMOS EL CSV DE LOS NODOS
-			FileWriter nodos = new FileWriter("nodos.csv");
+			FileWriter nodos = new FileWriter("nodos" + it + ".csv");
 			PrintWriter pw_nodo = new PrintWriter(nodos);
 			pw_nodo.println("ID");
 			
 			//CREAMOS EL CSV DE LAS ARISTAS
-			FileWriter aristas = new FileWriter("aristas.csv");
+			FileWriter aristas = new FileWriter("aristas" + it + ".csv");
 			PrintWriter pw_aristas = new PrintWriter(aristas);
 			pw_aristas.println("SOURCE	TARGET");
 			
