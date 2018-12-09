@@ -1,6 +1,7 @@
 package modeloAleatorio;
 
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 /*
@@ -35,8 +36,8 @@ public class AleatorioPanel extends javax.swing.JPanel {
         spinnerN = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        model = new SpinnerNumberModel(0.0000, 0.0000 ,1.0, 0.0001);
-        spinnerP = new JSpinner(model);
+        //model = new SpinnerNumberModel(0.00000, 0.00000 ,1.00000, 0.0001);
+        spinnerP = new JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         ejecutar = new javax.swing.JButton();
@@ -49,7 +50,7 @@ public class AleatorioPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Entre 0 y 1");
 
-        jLabel4.setText("Cuanto mayor sea el valor de N más se ralentizará el programa ");
+        jLabel4.setText("Al colocar decimales en P usar el PUNTO y no la COMA ej: 0.0015");
 
         ejecutar.setText("Ejecutar");
         ejecutar.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +125,7 @@ public class AleatorioPanel extends javax.swing.JPanel {
 
     private void ejecutarActionPerformed(java.awt.event.ActionEvent evt) {                                         
         long N = Long.parseLong( spinnerN.getValue().toString());
-        Double P = Double.parseDouble(spinnerP.getValue().toString());
+        Double P = Double.parseDouble(spinnerP.getText());
         MainAleatorio.N = N;
         MainAleatorio.p = P;
         MainAleatorio.comenzar();
@@ -144,7 +145,7 @@ public class AleatorioPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JSpinner spinnerN;
-    private javax.swing.JSpinner spinnerP;
+    private JTextField spinnerP;
     private javax.swing.JTextArea textArea;
     private SpinnerNumberModel model;
     // End of variables declaration                   
