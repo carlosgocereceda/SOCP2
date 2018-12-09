@@ -35,7 +35,7 @@ public class AleatorioPanel extends javax.swing.JPanel {
         spinnerN = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        model = new SpinnerNumberModel(0.0000, 0.0000 ,1.0, 0.001);
+        model = new SpinnerNumberModel(0.0000, 0.0000 ,1.0, 0.0001);
         spinnerP = new JSpinner(model);
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -49,7 +49,7 @@ public class AleatorioPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Entre 0 y 1");
 
-        jLabel4.setText("Cuanto mayor sea el valor de N más se relectizará el programa ");
+        jLabel4.setText("Cuanto mayor sea el valor de N más se ralentizará el programa ");
 
         ejecutar.setText("Ejecutar");
         ejecutar.addActionListener(new java.awt.event.ActionListener() {

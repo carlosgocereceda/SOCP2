@@ -75,6 +75,7 @@ public class MainBarabasi {
 			info = "Avg. Distance: " + gdis.getPathLength();
 			panel.escribe(info);
 			info = "Average clustering coefficient: " + cc.getAverageClusteringCoefficient();
+			
 			panel.escribe(info);
 			frame.update(frame.getGraphics());
 			
