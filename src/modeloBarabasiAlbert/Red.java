@@ -1,20 +1,26 @@
 package modeloBarabasiAlbert;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Red {
 	protected List<Arista> aristas;
-	protected HashMap<Integer, Nodo> nodos;
+	//protected HashMap<Integer, Nodo> nodos;
+	protected ArrayList<Nodo> nodos;
+	protected int nodosEnLaRed = 0;
 	
-	public Red(int initialCapacity) {
+	public Red(int initialCapacity, int nodos) {
 		this.aristas = new ArrayList<>(initialCapacity);
-		this.nodos = new HashMap<>();
+		//this.nodos = new HashMap<>();
+		this.nodos = new ArrayList<Nodo>();
+		for(int i = 0; i <= nodos; i++) {
+			this.nodos.add(null);
+		}
+		
 	}
 	
 	public int numNodos() {
-		return this.nodos.size();
+		return this.nodosEnLaRed;
 	}
 	
 	public int numAristas() {
@@ -29,10 +35,18 @@ public class Red {
 	
 	private void compruebaExistenciaNodos(Arista a) {
 		int nodo1 = a.getNodo1().getValue(), nodo2 = a.getNodo2().getValue();
-		if(!this.nodos.containsKey(nodo1))
+		if(this.nodos.get(nodo1) == null) {
+			this.nodos.set(nodo1,  new Nodo(nodo1, 0));
+			nodosEnLaRed += 1;
+		}
+		if(this.nodos.get(nodo2) == null) {
+			this.nodos.set(nodo2,  new Nodo(nodo2, 0));
+			nodosEnLaRed += 1;
+		}
+		/*if(!this.nodos.containsKey(nodo1))
 			this.nodos.put(nodo1, new Nodo(nodo1, 0));
 		if(!this.nodos.containsKey(nodo2))
-			this.nodos.put(nodo2, new Nodo(nodo2, 0));
+			this.nodos.put(nodo2, new Nodo(nodo2, 0));*/
 	}
 	
 	public void add(Arista a) {
@@ -52,8 +66,12 @@ public class Red {
 	 * @return Nodo parte de la red
 	 */
 	public Nodo getExistingNodo(int nodo) {
-		if(!this.nodos.containsKey(nodo))
-			this.nodos.put(nodo, new Nodo(nodo, 0));
+		if(this.nodos.get(nodo) == null) {
+			this.nodos.set(nodo, new Nodo(nodo, 0));
+			nodosEnLaRed += 1;
+		}
+		/*if(!this.nodos.containsKey(nodo))
+			this.nodos.put(nodo, new Nodo(nodo, 0));*/
 		
 		return this.nodos.get(nodo);
 	}
@@ -74,11 +92,14 @@ public class Red {
 		int max = 0;
 		Nodo nMax = null;
 		
-		for(Nodo n : this.nodos.values()) {
-			if(n.getDegree() > max) {
-				max = n.getDegree();
-				nMax = n;
+		for(Nodo n : this.nodos) {
+			if(n != null) {
+				if(n.getDegree() > max) {
+					max = n.getDegree();
+					nMax = n;
+				}
 			}
+			
 		}
 		
 		return nMax;
@@ -88,8 +109,11 @@ public class Red {
 	public String toString() {
 		String sOut = "###### NODOS ######" + System.getProperty("line.separator");
 		
-		for (Nodo n : this.nodos.values())
-			sOut += n + System.getProperty("line.separator");
+		for (Nodo n : this.nodos)
+			if(n != null) {
+				sOut += n + System.getProperty("line.separator");
+			}
+			
 		
 		sOut = "###### ARISTAS ######" + System.getProperty("line.separator");
 		

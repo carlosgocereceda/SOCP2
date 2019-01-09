@@ -14,7 +14,7 @@ public class GenerarBarabasiAlbert {
 	}
 
 	private Red generaRedInicial() {
-		Red red = new Red(this.m0);
+		Red red = new Red(this.m0, this.N);
 
 		for (int i = 1; i <= this.m0; i++) {
 			for (int j = 1; j <= this.m0; j++) {
