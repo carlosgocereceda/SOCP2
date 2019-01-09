@@ -31,12 +31,11 @@ public class GenerarBarabasiAlbert {
 
 	public Red simularRed() {
 		Red red = this.generaRedInicial();
-		
+		Ruleta ruleta = new Ruleta(red);
 		for (int i = red.numNodos() + 1; i < this.T + this.m0; i++) {
 			Nodo n1 = red.getExistingNodo(i); // Nuevo nodo
 
 			while (n1.getDegree() < this.M) { // Genera m <= m0 enlaces
-				Ruleta ruleta = new Ruleta(red);
 				
 				// Método de selección por ruleta
 				Integer in2 = ruleta.barabasi();
@@ -48,6 +47,8 @@ public class GenerarBarabasiAlbert {
 				} else {
 					Arista a = new Arista(n1, n2);
 					if (!n1.equals(n2) && !red.contains(a)) {
+						ruleta.update(in2);
+						ruleta.update(n1.getValue());
 						red.add(a);
 					} else {
 						// System.out.println("Ya contenia la arista: " + a);

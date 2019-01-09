@@ -24,4 +24,8 @@ public class Ruleta {
 		return ruleta.get(r.nextInt(ruleta.size()));
 	}
 
+	public void update(Integer nodo) {
+		ruleta.add(nodo);		
+	}
+
 }
