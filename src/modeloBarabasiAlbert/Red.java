@@ -87,6 +87,9 @@ public class Red {
 	public void setAristas(List<Arista> aristas) {
 		this.aristas = aristas;
 	}
+	public ArrayList<Nodo> getNodos(){
+		return this.nodos;
+	}
 	
 	public Nodo getLargestHubDegree() {
 		int max = 0;
