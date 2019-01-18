@@ -27,6 +27,7 @@ import org.gephi.statistics.plugin.GraphDensity;
 import org.gephi.statistics.plugin.GraphDistance;
 import org.openide.util.Lookup;
 
+
 public class ConversorGephiToolkit {
 	public GraphModel graphModel;
 	public Graph graph;
@@ -122,6 +123,7 @@ public class ConversorGephiToolkit {
 		this.graphModel = this.graph.getModel();
 	}
 	
+	// Construtora llamada en Redes Aleatorias
 	public ConversorGephiToolkit(Set<Arista> r) {
 		this.graphModel = new GraphModelImpl();
 

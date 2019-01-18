@@ -33,6 +33,7 @@ public class AleatorioPanel extends JPanel {
 	/**
 	 * Creates new form AleatorioPanel
 	 */
+	// Cargar la vista de la aplicacion
 	public AleatorioPanel() {
 		initGUI();
 		initComponents();
@@ -93,6 +94,7 @@ public class AleatorioPanel extends JPanel {
 		centerPanel.add(parametrosPanel);
 	}
 
+	// Aqui es donde llamaremos al MAIN
 	private void ejecutarActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException {
 		MainAleatorio.N = Long.parseLong(spinnerN.getValue().toString());
 		MainAleatorio.p = Double.parseDouble(spinnerP.getText());
@@ -104,6 +106,7 @@ public class AleatorioPanel extends JPanel {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					// Aqui concretamente
 					MainAleatorio.comenzar();
 				} catch (Exception e) {
 					JFrame frame = new JFrame();
