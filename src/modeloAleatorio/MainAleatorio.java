@@ -1,6 +1,5 @@
 package modeloAleatorio;
 
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,35 +16,40 @@ public class MainAleatorio {
 
 	public static long N;
 	public static double p;
+	public static int numIteraciones = 10;
 	
 	private static JFrame frame;
 	private static AleatorioPanel panel;
 	
 	public static void main(String[] args) {	
-		frame = new JFrame();
-		frame.setTitle("Analisis de Redes Sociales");
-		frame.setSize(1000, 650);
-		panel = new AleatorioPanel();
-		frame.setLayout(new BorderLayout());
-		frame.add(panel, BorderLayout.WEST);
-		frame.setVisible(true);
 		if(args.length < 2) {
-			System.out.println("USO: program <N> <p>");
+			System.out.println("USO: program <N> <p> <numIteraciones>");
+			System.out.println("Iniciando modo GUI por defecto...");
+			
+			frame = new JFrame();
+			frame.setTitle("Analisis de Redes Sociales");
+			frame.setSize(1000, 650);
+			panel = new AleatorioPanel();
+			frame.setContentPane(panel);
+			frame.setVisible(true);
 		} else {
-			//N = Long.parseLong(args[0]);
-			//p = Double.parseDouble(args[1]);
+			N = Long.parseLong(args[0]);
+			p = Double.parseDouble(args[1]);
 			
-			//System.out.println("N: " + N + "  p: " + p);
+			if(args.length > 2)
+				MainAleatorio.numIteraciones = Integer.parseInt(args[2]);
 			
-			//simular(10);
+			System.out.println("N: " + N + "  p: " + p);
+			
+			MainAleatorio.comenzar();
 			
 			// Exportar un ejemplo
-			//new GenerarGephi(generarSetAristas()).generaFicheros();
+			// new GenerarGephi(generarSetAristas()).generaFicheros();
 		}
 	}
 	
 	public static void comenzar() {
-		simular(10);
+		simular(numIteraciones);
 	}
 	
 	public static void simular(int iteraciones) {

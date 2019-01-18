@@ -1,6 +1,5 @@
 package modeloBarabasiAlbert;
 
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,42 +13,42 @@ public class MainBarabasi {
 	private static JFrame frame;
 	private static BarabasiPanel panel;
 	
-	public static Integer m;
-	public static Integer t;
+	public static int m;
+	public static int t;
+	public static int numIteraciones = 10;
 
 	public static void main(String[] args) {
-		
-		frame = new JFrame();
-		frame.setTitle("Analisis de Redes Sociales");
-		frame.setSize(1000, 650);
-		panel = new BarabasiPanel();
-		frame.setLayout(new BorderLayout());
-		frame.add(panel, BorderLayout.WEST);
-		frame.setVisible(true);
-		
-		/*
 		if (args.length < 2) {
-			System.out.println("USO: program <m> <t>");
-		} else {
-			Integer m = Integer.parseInt(args[0]);
-			Integer t = Integer.parseInt(args[1]);
-
-			System.out.println("m: " + m + "  t: " + t);
+			System.out.println("USO: program <m> <t> <numIteraciones>");
+			System.out.println("Iniciando modo GUI por defecto...");
 			
-			simular(m, t, 10);
-		*/
+			frame = new JFrame();
+			frame.setTitle("Analisis de Redes Sociales");
+			frame.setSize(1000, 650);
+			panel = new BarabasiPanel();
+			frame.setContentPane(panel);
+			frame.setVisible(true);
+		} else {
+			MainBarabasi.m = Integer.parseInt(args[0]);
+			MainBarabasi.t = Integer.parseInt(args[1]);
+
+			if(args.length > 2)
+				MainBarabasi.numIteraciones = Integer.parseInt(args[2]);
+			
+			MainBarabasi.comenzar();
+		
 			//GenerarBarabasiAlbert gen = new GenerarBarabasiAlbert(m, t);
 			//Red r = gen.simularRed();
 			//ConversorGephiToolkit conversor = new ConversorGephiToolkit(r);
 			//conversor.export("exportadoConversor.gexf");
 			//System.out.println("Exportado:  'exportadoConversor.gexf'");
-		//}
+		}
 	}
 	
 	public static void comenzar() {
 		System.out.println("m " + m);
 		System.out.println("t" + t);
-		simular(m, t, 10);
+		simular(m, t, numIteraciones);
 	}
 
 	public static void simular(int m, int t, int iteraciones) {
