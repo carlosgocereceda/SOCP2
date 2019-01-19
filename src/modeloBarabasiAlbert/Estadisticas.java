@@ -1,5 +1,7 @@
 package modeloBarabasiAlbert;
 
+// Transfer que almacena las métricas de las iteraciones
+
 public class Estadisticas {
 	private double density;
 	private Nodo largestHubDegree;

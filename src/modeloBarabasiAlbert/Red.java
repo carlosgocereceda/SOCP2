@@ -13,6 +13,7 @@ public class Red {
 		this.aristas = new ArrayList<>(initialCapacity);
 		//this.nodos = new HashMap<>();
 		this.nodos = new ArrayList<Nodo>();
+		// Inicializamos a null la lista de nodos
 		for(int i = 0; i <= nodos; i++) {
 			this.nodos.add(null);
 		}

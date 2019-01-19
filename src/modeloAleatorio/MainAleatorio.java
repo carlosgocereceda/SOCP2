@@ -205,7 +205,7 @@ public class MainAleatorio {
 		
 		if(pares.size() != ((N * (N - 1) ) / 2))
 			System.out.println("Numero de pares: " + pares.size() + " debian ser: " + ((N * (N - 1) ) / 2));
-		// Nos recorremos el HashMao de "pares"
+		// Nos recorremos el HashMap de "pares"
 		for (Arista a : pares) {
 			// Eligiendo aleatoriamente con que aristas nos quedamos y
 			// con las que nos quedemos las guardamos en el Hashmap "aristas"

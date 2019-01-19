@@ -15,6 +15,8 @@ import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
+// Clase que genera la vista de Barabasi
+
 public class BarabasiPanel extends JPanel {
 	private static final long serialVersionUID = -3442956276944280946L;
 	private JButton ejecutar;
@@ -92,7 +94,7 @@ public class BarabasiPanel extends JPanel {
 		
 		centerPanel.add(parametrosPanel);
 	}
-	
+	// Aqui llamaremos al MAIN de Barabasi
 	private void ejecutarActionPerformed(java.awt.event.ActionEvent evt) {
 		MainBarabasi.m = (Integer) spinnerM.getValue();
 		MainBarabasi.t = (Integer) spinnerT.getValue();
@@ -104,6 +106,7 @@ public class BarabasiPanel extends JPanel {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					// Aqui concretamente
 					MainBarabasi.comenzar();
 				} catch (Exception e) {
 					JFrame frame = new JFrame();

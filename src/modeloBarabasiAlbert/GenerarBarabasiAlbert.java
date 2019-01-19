@@ -28,7 +28,7 @@ public class GenerarBarabasiAlbert {
 		//		+ System.getProperty("line.separator") + red);
 		return red;
 	}
-
+	// Metodo llamado en el MAIN
 	public Red simularRed() {
 		Red red = this.generaRedInicial();
 		Ruleta ruleta = new Ruleta(red);
