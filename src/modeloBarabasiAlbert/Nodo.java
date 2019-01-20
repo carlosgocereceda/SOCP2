@@ -1,8 +1,8 @@
 package modeloBarabasiAlbert;
 
 public class Nodo {
-	private int value;
-	private int degree;
+	private int value;	// ID del nodo
+	private int degree;	// Numero de enlaces del nodo
 	
 	public Nodo(int i, int g) {
 		this.value = i;

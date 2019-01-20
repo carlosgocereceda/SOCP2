@@ -9,11 +9,14 @@ public class Ruleta {
 
 	public Ruleta(Red red) {
 		ArrayList<Nodo> nodos = red.getNodos();
-		ruleta = new ArrayList<Integer>();
+		this.ruleta = new ArrayList<Integer>();
+		// Recorremos los nodos de la red
 		for (Nodo nodo : nodos) {
+			// Mientras el nodo no sea null
 			if (nodo != null) {
+				// Cogemos y añadimos "n" veces a la lista de la RULETA el ID del nodo, n = numero del grado del nodo
 				for (int i = 0; i < nodo.getDegree(); i++) {
-					ruleta.add(nodo.getValue());
+					this.ruleta.add(nodo.getValue());
 				}
 			}
 		}
@@ -21,11 +24,11 @@ public class Ruleta {
 
 	public int barabasi() {
 		Random r = new Random();
-		return ruleta.get(r.nextInt(ruleta.size()));
+		return this.ruleta.get(r.nextInt(this.ruleta.size()));
 	}
 
 	public void update(Integer nodo) {
-		ruleta.add(nodo);		
+		this.ruleta.add(nodo);		
 	}
 
 }

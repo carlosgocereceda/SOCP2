@@ -56,10 +56,12 @@ public class MainBarabasi {
 		// Declaramos la lista que tendra la informacion de cada iteracion
 		// para mas tarde hacer la correspondiente media de todas las iteraciones
 		List<Estadisticas> estadisticas = new ArrayList<>();
-
+		
+		// Inicializamos los valores por defecto
+		GenerarBarabasiAlbert gen = new GenerarBarabasiAlbert(m, t);
 		// Bucle que realizara las correspondientes iteraciones
 		for (int i = 0; i < iteraciones; i++) {
-			GenerarBarabasiAlbert gen = new GenerarBarabasiAlbert(m, t);
+			// Generamos la red Barabasi
 			Red r = gen.simularRed();
 			
 			// (REVISAR COMENTARIO)
