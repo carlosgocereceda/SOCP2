@@ -180,7 +180,6 @@ public class MainAleatorio {
 				// Nos aseguramos de no coger aristas repetidas y lo guardamos
 				// en el HashMap de "pares"
 				if (i != j && !lista.contains(a) && !lista.contains(a2))
-				//if(!lista.contains(a))
 					lista.add(a);
 			}
 		}
