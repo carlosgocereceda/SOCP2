@@ -74,7 +74,6 @@ public class GenerarBarabasiAlbert {
 				}
 			}
 		}
-
 		return red;
 	}
 

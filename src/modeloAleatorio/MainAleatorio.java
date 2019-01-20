@@ -20,7 +20,7 @@ public class MainAleatorio {
 	
 	private static JFrame frame;
 	private static AleatorioPanel panel;
-	private static Set<Arista> pares;
+	private static Set<Arista> paresOriginal;
 	
 	public static void main(String[] args) {	
 		if(args.length < 2) {
@@ -60,8 +60,8 @@ public class MainAleatorio {
 
 		System.out.println("Comenzando la simulacion de una red aleatoria de N = " + N + " y p =" + p);
 
-		// Esta metodo lo que era es crear la red una sola vez y mas adelante 
-		// eligiremos que aristas cogeremos todo de forma aleatoria
+		// Esta metodo lo que hara es crear la red una sola vez y mas adelante 
+		// eligiremos que aristas cogeremos, todo de forma aleatoria
 		inicializarRed();
 		// Iremos creando varias redes aleatorias, segun el numero de iteraciones
 		for (int i = 0; i < iteraciones; i++) {
@@ -180,14 +180,16 @@ public class MainAleatorio {
 				// Nos aseguramos de no coger aristas repetidas y lo guardamos
 				// en el HashMap de "pares"
 				if (i != j && !lista.contains(a) && !lista.contains(a2))
+				//if(!lista.contains(a))
 					lista.add(a);
 			}
 		}
-		pares = lista;
+		System.out.println("Tamaño de la red despues de haber hecho todas las aristas: "+ lista.size());
+		paresOriginal = lista;
 	}
 	// Metodo que genera las aristas
 	public static Set<Arista> generarSetAristas(int it) {
-		//Set<Arista> pares = new HashSet<Arista>();
+		Set<Arista> pares = paresOriginal;
 		Set<Arista> aristas = new HashSet<Arista>();
 		
 		// Creamos todas las aristas posibles
