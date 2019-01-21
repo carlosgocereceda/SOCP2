@@ -43,25 +43,26 @@ public class MainAleatorio {
 			System.out.println("N: " + N + "  p: " + p);
 			
 			MainAleatorio.comenzar();
-			
-			// Exportar un ejemplo
-			// new GenerarGephi(generarSetAristas()).generaFicheros();
 		}
 	}
-	// Metodo que sera llamado en la vista(GUI)
+	/**
+	 * Comienza la simulación
+	 * sera llamado en la vista(GUI)
+	 */
 	public static void comenzar() {
 		simular(numIteraciones);
-	}
-	// Metodo resposable de realizar la logica de la aplicacion
+	} 
+	/**
+	 * Metodo resposable de realizar la logica de la aplicacion
+	 * @param iteraciones numero de veces que se va a ejecutar el programa
+	 */
 	public static void simular(int iteraciones) {
-		// En este arrayList nos hiremos guardando los datos de cada iteracion, 
+		List<Estadisticas> estadisticas = new ArrayList<>();//ArrayList en el que guardamos los datos de cada iteración
 		// para mas adelante hacer la media total de todas las iteraciones
-		List<Estadisticas> estadisticas = new ArrayList<>();
-
 		System.out.println("Comenzando la simulacion de una red aleatoria de N = " + N + " y p =" + p);
 
-		// Esta metodo lo que hara es crear la red una sola vez y mas adelante 
-		// eligiremos que aristas cogeremos, todo de forma aleatoria
+		// Esta metodo lo que hara es crear la red con todas las aristas posibles una sola vez y mas adelante 
+		// en cada iteración eligiremos que aristas cogeremos de forma aleatoria
 		inicializarRed();
 		// Iremos creando varias redes aleatorias, segun el numero de iteraciones
 		for (int i = 0; i < iteraciones; i++) {
@@ -72,15 +73,14 @@ public class MainAleatorio {
 			GraphDistance gdis = conversor.getGraphDistance();
 			ClusteringCoefficient cc = conversor.getClusteringCoefficient();
 
-			// Guardamos toda esta informacion en un transfer
+			// Guardamos la informacion de las estadisticas
 			Estadisticas e = new Estadisticas(conversor.getNumAristas(), gd.getDensity(), conversor.getShortestHubDegree(), conversor.getLargestHubDegree(),gdis.getPathLength(),
 					cc.getAverageClusteringCoefficient(),
 					conversor.getDegree().getAverageDegree(),
 					conversor.getConnectedComponents().getConnectedComponentsCount());
-			// Y a su vez lo guardamos en la lista de estadisticas
 			estadisticas.add(e);
 			
-			// Mostramos la informacion de los datos por el JLabel de la izquierda de la inferfaz de la aplicación
+			// Mostramos la informacion
 			String info = System.getProperty("line.separator") + "Simulacion numero: " + (i + 1) + " terminada";
 			panel.escribe(info);
 			frame.repaint();
@@ -112,8 +112,6 @@ public class MainAleatorio {
 			System.out.println("Degree: " + e.getAvgDegree());
 			System.out.println("Connected components: " + e.getConnectedComponents());
 		}
-		// Después de a ver hecho las correspondientes iteraciones
-		// Declaro las variables que calcularan 
 		double sNumAristas = 0, avgNumAristas = 0, sDensity = 0, avgDensity = 0, sAvgDistance = 0, avgDistance = 0, sAvgClustCoefficient = 0, avgClustCoefficient = 0, sLargestHubDegree = 0, avgLargestHubDegree = 0, sShortestHubDegree = 0, avgShortestHubDegree = 0,
 				sAvgDegree = 0, avgDegree = 0, sConnectedComponents = 0, avgConnectedComponents = 0;
 		
@@ -167,18 +165,20 @@ public class MainAleatorio {
 		System.out.println("Connected components: " + avgConnectedComponents);
 	}
 
-	// Creamos todas las posibles aristas
+	/**
+	 * Método utilizado para crear inicialmente la red
+	 * Unicamente es llamado una vez al comenzar la ejecucion
+	 * Genera todas las aristas posibles.
+	 * En cada iteración se cogen de manera aleatoria aristas de aquí
+	 */
 	public static void inicializarRed(){
 		Set<Arista> lista = new HashSet<Arista>();
 		// Creamos todas las aristas posibles
 		for (int i = 1; i <= N; i++) {
 			for (int j = i + 1; j <= N; j++) {
-				// Creamos una arista que va de "i" a "j"
-				Arista a = new Arista(i, j);
-				// Creamos una arista que va de "j" a "i"
-				Arista a2 = new Arista(j, i);
-				// Nos aseguramos de no coger aristas repetidas y lo guardamos
-				// en el HashMap de "pares"
+				Arista a = new Arista(i, j); //arista que va de "i" a "j"
+				Arista a2 = new Arista(j, i);//arista que va de "j" a "i"
+				// Si no esta repetida la arista la guardamos
 				if (i != j && !lista.contains(a) && !lista.contains(a2))
 					lista.add(a);
 			}
@@ -186,45 +186,35 @@ public class MainAleatorio {
 		System.out.println("Tamaño de la red despues de haber hecho todas las aristas: "+ lista.size());
 		paresOriginal = lista;
 	}
-	// Metodo que genera las aristas
+	/**
+	 * Metodo que genera las aristas
+	 * De entre todas las aristas posibles elige algunas aleatoriamente
+	 * @param it numero de la iteracion en la que nos encontramos
+	 * @return aristas de la iteracion
+	 */
 	public static Set<Arista> generarSetAristas(int it) {
-		Set<Arista> pares = paresOriginal;
 		Set<Arista> aristas = new HashSet<Arista>();
 		
-		// Creamos todas las aristas posibles
-		/*for (int i = 1; i <= N; i++) {
-			for (int j = i + 1; j <= N; j++) {
-				// Creamos una arista que va de "i" a "j"
-				Arista a = new Arista(i, j);
-				// Creamos una arista que va de "j" a "i"
-				Arista a2 = new Arista(j, i);
-				// Nos aseguramos de no coger aristas repetidas y lo guardamos en el HashMap de "pares"
-				if(i != j && !pares.contains(a) && !pares.contains(a2))
-					pares.add(a);
-			}
-		}*/
-		
-		if(pares.size() != ((N * (N - 1) ) / 2))
-			System.out.println("Numero de pares: " + pares.size() + " debian ser: " + ((N * (N - 1) ) / 2));
-		// Nos recorremos el HashMap de "pares"
-		for (Arista a : pares) {
-			// Eligiendo aleatoriamente con que aristas nos quedamos y
-			// con las que nos quedemos las guardamos en el Hashmap "aristas"
+		if(paresOriginal.size() != ((N * (N - 1) ) / 2))
+			System.out.println("Numero de pares: " + paresOriginal.size() + " debian ser: " + ((N * (N - 1) ) / 2));
+		// Nos recorremos el HashMap de "pares" con todas las aristas posibles y elegimos aleatoriamente de ellas
+		for (Arista a : paresOriginal) {
 			if(generarRandom(p))
 				aristas.add(a);
 		}
 		// Genera los CSVs de los nodos y de las aristas
 		new GenerarGephi(aristas).generaFicheros(it);
-		
 		return aristas;
 	}
 
-	// Metodo que da aleatoriamente un boolean, usando la probabilidad "p" que el usuario eligio
+	/**
+	 * Metodo que da aleatoriamente un boolean, usando la probabilidad "p" que el usuario eligio
+	 * @param p probabilidad
+	 * @return indica si o no
+	 */
 	public static boolean generarRandom(double p){
-		Double result;
 		Random r= new Random();
-		result = r.nextDouble();
-		
+		Double result = r.nextDouble();
 		return result <= p;
 	}
 }
