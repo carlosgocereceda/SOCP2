@@ -49,7 +49,6 @@ public class GenerarBarabasiAlbert {
 		// Nos guardamos en la ruleta las veces que salen los nodos, para luego elegir cual cogeremos
 		Ruleta ruleta = this.ruletaOriginal;
 		
-		// No se que haceis aqui
 		for (int i = red.numNodos() + 1; i < this.T + this.m0; i++) {
 			Nodo n1 = red.getExistingNodo(i); // Nuevo nodo
 
@@ -65,6 +64,10 @@ public class GenerarBarabasiAlbert {
 				} else {
 					Arista a = new Arista(n1, n2);
 					if (!n1.equals(n2) && !red.contains(a)) {
+						/*
+						 * Actualiza la ruleta, sumando uno al grado de n1 y n2
+						 * para no generar la ruleta varias veces
+						 */
 						ruleta.update(in2);
 						ruleta.update(n1.getValue());
 						red.add(a);
