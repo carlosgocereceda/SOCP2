@@ -89,7 +89,6 @@ public class MainBarabasi {
 			// Calculo el coeficiente de Clustering
 			avgClustCoefficient = Math.pow(lnN, 2)/2;
 			
-			
 			// Creo el transfer estadisticas para añadirlo a la lisat de estadisticas para mas tarde hacer la media
 			Estadisticas aux = new Estadisticas(numAristas, density, largestHubDegree, avgDistance, avgClustCoefficient);
 			
