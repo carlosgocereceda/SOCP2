@@ -202,6 +202,7 @@ public class ConversorGephiToolkit {
 		if (this.degree == null)
 			this.degree = new Degree();
 
+		
 		this.degree.execute(this.graph);
 
 		return this.degree;

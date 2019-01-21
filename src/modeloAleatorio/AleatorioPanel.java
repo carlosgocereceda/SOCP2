@@ -96,7 +96,7 @@ public class AleatorioPanel extends JPanel {
 
 	// Aqui es donde llamaremos al MAIN
 	private void ejecutarActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException {
-		MainAleatorio.N = Long.parseLong(spinnerN.getValue().toString());
+		MainAleatorio.N = Integer.parseInt(spinnerN.getValue().toString());
 		MainAleatorio.p = Double.parseDouble(spinnerP.getText());
 		MainAleatorio.numIteraciones = Integer.parseInt(numIteracionesField.getValue().toString());
 		
