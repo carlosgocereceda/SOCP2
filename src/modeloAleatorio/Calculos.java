@@ -59,5 +59,8 @@ public class Calculos {
 	public double getDensity() {
 		return aristas.size() / ((N*(N-1)) / 2);
 	}
+	public double getAvarageDistance() {
+		return Math.log(N) / Math.log(this.gradoMedio);
+	}
 	
 }

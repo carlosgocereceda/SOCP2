@@ -84,7 +84,7 @@ public class MainAleatorio {
 			*/
 			Set<Arista> aristas = generarSetAristas(i);
 			Calculos calculos = new Calculos(aristas,N);
-			Estadisticas e = new Estadisticas(calculos.getNumAristas(), calculos.getDensity(), calculos.getMinHub(), calculos.getMaxHub(),0.0,
+			Estadisticas e = new Estadisticas(calculos.getNumAristas(), calculos.getDensity(), calculos.getMinHub(), calculos.getMaxHub(), calculos.getAvarageDistance(),
 					calculos.getClustering(),
 					calculos.getGradoMedio(),
 					0);
