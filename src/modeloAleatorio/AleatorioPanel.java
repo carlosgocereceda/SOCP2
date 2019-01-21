@@ -41,8 +41,8 @@ public class AleatorioPanel extends JPanel {
 
 	private void initComponents() {
 		spinnerN = new JSpinner();
-		spinnerN.setValue(1);
-		spinnerP = new JTextField("0.00001");
+		spinnerN.setValue(500);
+		spinnerP = new JTextField("0.01");
 		numIteracionesField = new JSpinner();
 		numIteracionesField.setValue(10);
 		
@@ -75,7 +75,7 @@ public class AleatorioPanel extends JPanel {
 		JPanel nPanel = new JPanel(new GridLayout(2, 2, 10, 10));
 		nPanel.add(new JLabel("N:"));
 		nPanel.add(spinnerN);
-		nPanel.add(new JLabel("Entre 0 y 1"));
+		nPanel.add(new JLabel("Número de nodos"));
 		parametrosPanel.add(nPanel);
 		
 		JPanel pPanel = new JPanel(new GridLayout(2, 2, 10, 10));
