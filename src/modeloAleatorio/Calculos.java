@@ -10,8 +10,10 @@ public class Calculos {
 	private double gradoMedio = 0.0;
 	private int max = 0;
 	private int min = 0;
+	private int N;
 	
 	public Calculos(Set<Arista> aristas, int N) {
+		this.N = N;
 		gradoNodos = new ArrayList<Integer>();
 		this.aristas = aristas;
 		
@@ -42,14 +44,20 @@ public class Calculos {
 	public double getGradoMedio() {
 		return this.gradoMedio;
 	}
-	public int maxHub() {
+	public int getMaxHub() {
 		return this.max;
 	}
-	public int minHub() {
+	public int getMinHub() {
 		return this.min;
 	}
-	public int numAristas() {
+	public int getNumAristas() {
 		return aristas.size();
+	}
+	public double getClustering() {
+		return getGradoMedio()/N;
+	}
+	public double getDensity() {
+		return aristas.size() / ((N*(N-1)) / 2);
 	}
 	
 }
