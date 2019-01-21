@@ -59,6 +59,7 @@ public class MainBarabasi {
 		
 		// Inicializamos los valores por defecto
 		
+		
 		// Bucle que realizara las correspondientes iteraciones
 		for (int i = 0; i < iteraciones; i++) {
 			// Generamos la red Barabasi
@@ -67,10 +68,31 @@ public class MainBarabasi {
 			
 			// (REVISAR COMENTARIO)
 			// Utilizamos una herramiente de JAVA, para convertir los datos de Gephi
-			ConversorGephiToolkit conversor = new ConversorGephiToolkit(r);
+			/*ConversorGephiToolkit conversor = new ConversorGephiToolkit(r);
 			GraphDensity gd = conversor.getDensity();
 			GraphDistance gdis = conversor.getGraphDistance();
-			ClusteringCoefficient cc = conversor.getClusteringCoefficient();
+			ClusteringCoefficient cc = conversor.getClusteringCoefficient();*/
+			
+			// NUEVO
+			double density, avgDistance, avgClustCoefficient;
+			// Calculo el numero de aristas de la red
+			int numAristas = r.getAristas().size();
+			// Cojo el nodo con el grado mas alto
+			Nodo largestHubDegree = r.getLargestHubDegree();
+			// Calculo la densidad
+			double Lmax = largestHubDegree.getDegree();
+			density = numAristas/Lmax;
+			
+			double lnN = Math.log(r.getNodos().size());
+			// Calculo la Average distance 
+			avgDistance = lnN/(Math.log(lnN));
+			// Calculo el coeficiente de Clustering
+			avgClustCoefficient = Math.pow(lnN, 2)/2;
+			
+			
+			// Creo el transfer estadisticas para añadirlo a la lisat de estadisticas para mas tarde hacer la media
+			Estadisticas aux = new Estadisticas(numAristas, density, largestHubDegree, avgDistance, avgClustCoefficient);
+			
 			
 			// Pintamos por pantalla la informacion resultante de calcular
 			// las distintas métricas de Barabasi
@@ -79,13 +101,13 @@ public class MainBarabasi {
 			frame.repaint();
 			info = "Num. Aristas: " + r.numAristas();
 			panel.escribe(info);
-			info = "Density: " + gd.getDensity();
+			info = "Density: " + density;
 			panel.escribe(info);
 			info = "Largest Hub Degree: " + r.getLargestHubDegree();
 			panel.escribe(info);
-			info = "Avg. Distance: " + gdis.getPathLength();
+			info = "Avg. Distance: " + avgDistance;
 			panel.escribe(info);
-			info = "Average clustering coefficient: " + cc.getAverageClusteringCoefficient();
+			info = "Average clustering coefficient: " + avgClustCoefficient;
 			
 			panel.escribe(info);
 			frame.update(frame.getGraphics());
@@ -96,8 +118,7 @@ public class MainBarabasi {
 			//conversor.export("exportadoConversor.gexf");
 			
 			// Añado los nuevos datos a la lista
-			estadisticas.add(new Estadisticas(r.numAristas(), gd.getDensity(), r.getLargestHubDegree(), gdis.getPathLength(),
-					cc.getAverageClusteringCoefficient()));
+			estadisticas.add(aux);
 			
 		}
 		// Hemos acabado las iteraciones
