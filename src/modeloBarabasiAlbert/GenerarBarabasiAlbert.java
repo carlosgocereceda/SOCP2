@@ -23,14 +23,14 @@ public class GenerarBarabasiAlbert {
 
 	private Red generaRedInicial() {
 		Red red = new Red(this.m0, this.N);
-		for(int i = 0; i < m0; i++) {
+		for(int i = 0; i < m0+1; i++) {
 			Node nodo1 = red.getGraphModel().factory().newNode(Integer.toString(i));
 			red.getGraph().addNode(nodo1);
 		}
 		
 		// Nos recorremos todos los nodos INICIALES, añadiendoles la rista entre ellos, si no existese
-		for (int i = 1; i < this.m0; i++) {
-			for (int j = i+1; j < this.m0; j++) {
+		for (int i = 1; i < this.m0 +1; i++) {
+			for (int j = i+1; j < this.m0 +1; j++) {
 				Node nodo1 = red.getGraph().getNode(Integer.toString(i));
 				Node nodo2 = red.getGraph().getNode(Integer.toString(j));
 				Edge e1 = red.getGraph().getEdge(nodo1, nodo2);
