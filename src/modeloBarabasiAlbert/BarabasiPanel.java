@@ -52,6 +52,7 @@ public class BarabasiPanel extends JPanel {
 		textArea = new JTextArea();
 		textArea.setColumns(20);
 		textArea.setRows(5);
+		textArea.setEditable(false);
 		jScrollPane.setViewportView(textArea);
 		
 		ejecutar.setText("Ejecutar");
