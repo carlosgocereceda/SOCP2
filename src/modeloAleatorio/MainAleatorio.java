@@ -20,7 +20,6 @@ public class MainAleatorio {
 	
 	private static JFrame frame;
 	private static AleatorioPanel panel;
-	private static ArrayList<Integer> nodos;
 	
 	public static void main(String[] args) {	
 		if(args.length < 2) {
@@ -60,10 +59,6 @@ public class MainAleatorio {
 		List<Estadisticas> estadisticas = new ArrayList<>();//ArrayList en el que guardamos los datos de cada iteración
 		// para mas adelante hacer la media total de todas las iteraciones
 		System.out.println("Comenzando la simulacion de una red aleatoria de N = " + N + " y p =" + p);
-
-		// Esta metodo lo que hara es crear la red con todas las aristas posibles una sola vez y mas adelante 
-		// en cada iteración eligiremos que aristas cogeremos de forma aleatoria
-		inicializarRed();
 		// Iremos creando varias redes aleatorias, segun el numero de iteraciones
 		for (int i = 0; i < iteraciones; i++) {
 			ConversorGephiToolkit conversor = new ConversorGephiToolkit(generarSetAristas(i),N);
@@ -183,26 +178,7 @@ public class MainAleatorio {
 	 * Genera todas las aristas posibles.
 	 * En cada iteración se cogen de manera aleatoria aristas de aquí
 	 */
-	public static void inicializarRed(){
-		nodos = new ArrayList<Integer>();
-		for(int i = 0; i < N; i++) {
-			nodos.add(i);
-		}
-		/*Set<Arista> lista = new HashSet<Arista>();
-		// Creamos todas las aristas posibles
-		for (int i = 1; i <= N; i++) {
-			for (int j = i + 1; j <= N; j++) {
-				Arista a = new Arista(i, j); //arista que va de "i" a "j"
-				Arista a2 = new Arista(j, i);//arista que va de "j" a "i"
-				// Si no esta repetida la arista la guardamos
-				if (i != j && !lista.contains(a) && !lista.contains(a2))
-					lista.add(a);
-			}
-		}
-		System.out.println("Tamaño de la red despues de haber hecho todas las aristas: "+ lista.size());
-		paresOriginal = lista;*/
-		
-	}
+	
 	/**
 	 * Metodo que genera las aristas
 	 * De entre todas las aristas posibles elige algunas aleatoriamente
@@ -211,31 +187,12 @@ public class MainAleatorio {
 	 */
 	public static Set<Arista> generarSetAristas(int it) {
 		Set<Arista> aristas = new HashSet<Arista>();
-		
-		/*if(paresOriginal.size() != ((N * (N - 1) ) / 2))
-			System.out.println("Numero de pares: " + paresOriginal.size() + " debian ser: " + ((N * (N - 1) ) / 2));
-		// Nos recorremos el HashMap de "pares" con todas las aristas posibles y elegimos aleatoriamente de ellas
-		for (Arista a : paresOriginal) {
-			if(generarRandom(p))
-				aristas.add(a);
-		}
-		// Genera los CSVs de los nodos y de las aristas
-		new GenerarGephi(aristas).generaFicheros(it);*/
-		
-		int bucle = (int) (N * (N - 1)  / 2);
-		
-		for(int i = 0; i < bucle; i++) {
-			Random r = new Random();
-			int nodo1 = 0;
-			int nodo2 = 0;
-			do {
-				nodo1 = nodos.get(r.nextInt(nodos.size()));
-				nodo2 = nodos.get(r.nextInt(nodos.size()));
-			}while(nodo1 == nodo2);
-			
-			if(generarRandom(p)) {
-				Arista a = new Arista(nodo1,nodo2);
-				aristas.add(a);
+		for(int i = 0; i < N; i++) {
+			for(int j = 0; j < i; j ++) {
+				if(generarRandom(p)) {
+					Arista a = new Arista(i,j);
+					aristas.add(a);
+				}
 			}
 		}
 		
