@@ -20,8 +20,6 @@ public class MainAleatorio {
 	
 	private static JFrame frame;
 	private static AleatorioPanel panel;
-	private static Set<Arista> paresOriginal;
-	
 	private static ArrayList<Integer> nodos;
 	
 	public static void main(String[] args) {	
@@ -68,7 +66,7 @@ public class MainAleatorio {
 		inicializarRed();
 		// Iremos creando varias redes aleatorias, segun el numero de iteraciones
 		for (int i = 0; i < iteraciones; i++) {
-			/*ConversorGephiToolkit conversor = new ConversorGephiToolkit(generarSetAristas(i));
+			ConversorGephiToolkit conversor = new ConversorGephiToolkit(generarSetAristas(i),N);
 
 			// Datos que nos dara el conversor, como la densidad de la red, coeficiente de clustering, etc
 			GraphDensity gd = conversor.getDensity();
@@ -81,14 +79,14 @@ public class MainAleatorio {
 					conversor.getDegree().getAverageDegree(),
 					conversor.getConnectedComponents().getConnectedComponentsCount());
 			estadisticas.add(e);
-			*/
-			Set<Arista> aristas = generarSetAristas(i);
+			
+			/*Set<Arista> aristas = generarSetAristas(i);
 			Calculos calculos = new Calculos(aristas,N);
 			Estadisticas e = new Estadisticas(calculos.getNumAristas(), calculos.getDensity(), calculos.getMinHub(), calculos.getMaxHub(), calculos.getAvarageDistance(),
 					calculos.getClustering(),
 					calculos.getGradoMedio(),
 					0);
-			estadisticas.add(e);
+			estadisticas.add(e);*/
 			// Mostramos la informacion
 			String info = System.getProperty("line.separator") + "Simulacion numero: " + (i + 1) + " terminada";
 			panel.escribe(info);

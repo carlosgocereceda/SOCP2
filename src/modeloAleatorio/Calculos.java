@@ -63,4 +63,5 @@ public class Calculos {
 		return Math.log(N) / Math.log(this.gradoMedio);
 	}
 	
+	
 }

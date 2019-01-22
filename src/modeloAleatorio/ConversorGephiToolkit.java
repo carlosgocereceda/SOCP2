@@ -3,11 +3,9 @@ package modeloAleatorio;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.gephi.graph.api.Edge;
-import org.gephi.graph.api.Graph;
 import org.gephi.graph.api.GraphController;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.Node;
@@ -30,7 +28,7 @@ import org.openide.util.Lookup;
 
 public class ConversorGephiToolkit {
 	public GraphModel graphModel;
-	public Graph graph;
+	public UndirectedGraph graph;
 	private Degree degree = null;
 	private int numAristas = 0;
 	private int numPares = 0;
@@ -40,6 +38,7 @@ public class ConversorGephiToolkit {
 
 		// Convert a Red to a GraphModel just adding the nodes and edges to the empty
 		this.graph = this.graphModel.getUndirectedGraph();
+		
 		Set<Edge> edgesToRemove = new HashSet<>();
 
 		for (int i = 1; i <= MainAleatorio.N; i++) {
@@ -64,8 +63,8 @@ public class ConversorGephiToolkit {
 					if(( (e != null && !this.graph.contains(e)) || e == null)
 							&& (e2 != null && !this.graph.contains(e2) || e2 == null)) {
 						if(e == null && e2 == null) {
-							e = graphModel.factory().newEdge(n1, n2, false);
-							this.graph.addEdge(e);
+							//e = graphModel.factory().newEdge(n1, n2, false);
+							//this.graph.addEdge(e);
 						} else if(e != null) {
 							this.graph.addEdge(e);
 						} else {
@@ -91,44 +90,16 @@ public class ConversorGephiToolkit {
 		
 		this.graphModel = this.graph.getModel();
 	}
-
-	public ConversorGephiToolkit(List<Arista> r) {
-		this.graphModel = new GraphModelImpl();
-
-		// Convert a Red to a GraphModel just adding the nodes and edges to the empty
-		this.graph = this.graphModel.getUndirectedGraph();
-
-		for (Arista a : r) {
-			Node n1 = this.graph.getNode(Integer.toString(a.getNodo1()));
-			if (n1 == null) {
-				n1 = graphModel.factory().newNode(Integer.toString(a.getNodo1()));
-				this.graph.addNode(n1);
-			}
-
-			Node n2 = this.graph.getNode(Integer.toString(a.getNodo2()));
-			if (n2 == null) {
-				n2 = graphModel.factory().newNode(Integer.toString(a.getNodo2()));
-				this.graph.addNode(n2);
-			}
-
-			Edge e = graph.getEdge(n1, n2);
-			e = e == null ? graphModel.factory().newEdge(n1, n2, false) : e;
-			
-			if (!this.graph.contains(e))
-				this.graph.addEdge(e);
-
-		}
-
-		this.numAristas = this.graph.getEdgeCount();
-		this.graphModel = this.graph.getModel();
-	}
-	
 	// Construtora llamada en Redes Aleatorias
-	public ConversorGephiToolkit(Set<Arista> r) {
+	public ConversorGephiToolkit(Set<Arista> r, int N) {
 		this.graphModel = new GraphModelImpl();
 
 		// Convert a Red to a GraphModel just adding the nodes and edges to the empty
 		this.graph = this.graphModel.getUndirectedGraph();
+		for(int i = 0; i < N; i++) {
+			Node n1 = graphModel.factory().newNode(Integer.toString(i));
+			this.graph.addNode(n1);
+		}
 
 		for (Arista a : r) {
 			Node n1 = this.graph.getNode(Integer.toString(a.getNodo1()));
