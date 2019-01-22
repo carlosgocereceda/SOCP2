@@ -3,14 +3,14 @@ package modeloAleatorio;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Set;
+import org.gephi.graph.api.Edge;
 
 public class GenerarGephi {
 
-	private Set<Arista> red;
+	private Red red;
 	
 	
-	public GenerarGephi(Set<Arista> red) {
+	public GenerarGephi(Red red) {
 		this.red = red;
 	}
 	public void generaFicheros(int it) {
@@ -25,8 +25,8 @@ public class GenerarGephi {
 			PrintWriter pw_aristas = new PrintWriter(aristas);
 			pw_aristas.println("SOURCE	TARGET");
 			
-			for(Arista a: red) {
-				pw_aristas.println(a.getNodo1() + "	" + a.getNodo2());
+			for(Edge a: red.getGraph().getEdges()) {
+				pw_aristas.println(a.getSource().getId() + "	" + a.getTarget().getId());
 			}
 			
 			for (int i = 1; i <= MainAleatorio.N; i++) {

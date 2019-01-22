@@ -1,11 +1,8 @@
 package modeloAleatorio;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
-
 import javax.swing.JFrame;
 
 import org.gephi.statistics.plugin.ClusteringCoefficient;
@@ -61,18 +58,21 @@ public class MainAleatorio {
 		System.out.println("Comenzando la simulacion de una red aleatoria de N = " + N + " y p =" + p);
 		// Iremos creando varias redes aleatorias, segun el numero de iteraciones
 		for (int i = 0; i < iteraciones; i++) {
-			ConversorGephiToolkit conversor = new ConversorGephiToolkit(generarSetAristas(i),N);
+			Red red = new Red(N);
+			generarSetAristas(i,red);
+			
+			//ConversorGephiToolkit conversor = new ConversorGephiToolkit(generarSetAristas(i),N);
 
 			// Datos que nos dara el conversor, como la densidad de la red, coeficiente de clustering, etc
-			GraphDensity gd = conversor.getDensity();
-			GraphDistance gdis = conversor.getGraphDistance();
-			ClusteringCoefficient cc = conversor.getClusteringCoefficient();
+			GraphDensity gd = red.getDensity();
+			GraphDistance gdis = red.getGraphDistance();
+			ClusteringCoefficient cc = red.getClusteringCoefficient();
 
 			// Guardamos la informacion de las estadisticas
-			Estadisticas e = new Estadisticas(conversor.getNumAristas(), gd.getDensity(), conversor.getShortestHubDegree(), conversor.getLargestHubDegree(),gdis.getPathLength(),
+			Estadisticas e = new Estadisticas(red.getNumAristas(), gd.getDensity(), red.getShortestHubDegree(), red.getLargestHubDegree(),gdis.getPathLength(),
 					cc.getAverageClusteringCoefficient(),
-					conversor.getDegree().getAverageDegree(),
-					conversor.getConnectedComponents().getConnectedComponentsCount());
+					red.getDegree().getAverageDegree(),
+					red.getConnectedComponents().getConnectedComponentsCount());
 			estadisticas.add(e);
 			
 			/*Set<Arista> aristas = generarSetAristas(i);
@@ -185,19 +185,15 @@ public class MainAleatorio {
 	 * @param it numero de la iteracion en la que nos encontramos
 	 * @return aristas de la iteracion
 	 */
-	public static Set<Arista> generarSetAristas(int it) {
-		Set<Arista> aristas = new HashSet<Arista>();
+	public static void generarSetAristas(int it, Red red) {
 		for(int i = 0; i < N; i++) {
 			for(int j = 0; j < i; j ++) {
 				if(generarRandom(p)) {
-					Arista a = new Arista(i,j);
-					aristas.add(a);
+					red.addArista(i, j);
 				}
 			}
-		}
-		
-		new GenerarGephi(aristas).generaFicheros(it);
-		return aristas;
+		}		
+		new GenerarGephi(red).generaFicheros(it);
 	}
 
 	/**
