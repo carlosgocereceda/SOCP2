@@ -42,7 +42,7 @@ public class AleatorioPanel extends JPanel {
 	private void initComponents() {
 		spinnerN = new JSpinner();
 		spinnerN.setValue(500);
-		spinnerP = new JTextField("0.01");
+		spinnerP = new JTextField("0.001");
 		numIteracionesField = new JSpinner();
 		numIteracionesField.setValue(10);
 		

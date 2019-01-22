@@ -81,7 +81,12 @@ public class MainAleatorio {
 			estadisticas.add(e);
 			
 			/*Set<Arista> aristas = generarSetAristas(i);
+			*/
+			/*Set<Arista> aristas = generarSetAristas(i);
+			// Hacemos los calculos correspondientes
+
 			Calculos calculos = new Calculos(aristas,N);
+			// Los guardamos en la lisata de "estadisticas" para posteriormente hacer la media
 			Estadisticas e = new Estadisticas(calculos.getNumAristas(), calculos.getDensity(), calculos.getMinHub(), calculos.getMaxHub(), calculos.getAvarageDistance(),
 					calculos.getClustering(),
 					calculos.getGradoMedio(),
