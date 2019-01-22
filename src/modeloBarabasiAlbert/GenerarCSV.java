@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.gephi.graph.api.Edge;
+
 public class GenerarCSV {
 
 	private Red red;
@@ -26,8 +28,8 @@ public class GenerarCSV {
 			PrintWriter pw_aristas = new PrintWriter(aristas);
 			pw_aristas.println("SOURCE	TARGET");
 			
-			for(int i = 0 ; i < red.getAristas().size(); i ++) {
-				pw_aristas.println(red.getAristas().get(i).getNodo1().getValue() + "	" + red.getAristas().get(i).getNodo2().getValue());
+			for(Edge a: red.getGraph().getEdges()) {
+				pw_aristas.println(a.getSource().getId() + "	" + a.getTarget().getId());
 			}
 			
 			for (int i = 1; i <= n; i++) {

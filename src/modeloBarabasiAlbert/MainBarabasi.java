@@ -65,29 +65,20 @@ public class MainBarabasi {
 			// Generamos la red Barabasi
 			GenerarBarabasiAlbert gen = new GenerarBarabasiAlbert(m, t);
 			Red r = gen.simularRed();
-			
-			// (REVISAR COMENTARIO)
-			// Utilizamos una herramiente de JAVA, para convertir los datos de Gephi
-			/*ConversorGephiToolkit conversor = new ConversorGephiToolkit(r);
-			GraphDensity gd = conversor.getDensity();
-			GraphDistance gdis = conversor.getGraphDistance();
-			ClusteringCoefficient cc = conversor.getClusteringCoefficient();*/
-			
-			// NUEVO
 			double density, avgDistance, avgClustCoefficient;
 			// Calculo el numero de aristas de la red
-			int numAristas = r.getAristas().size();
+			int numAristas = r.getNumAristas();
 			// Cojo el nodo con el grado mas alto
-			Nodo largestHubDegree = r.getLargestHubDegree();
-			// Calculo la densidad
-			double Lmax = largestHubDegree.getDegree();
-			density = numAristas/Lmax;
+			int largestHubDegree = r.getLargestHubDegree();
 			
-			double lnN = Math.log(r.getNodos().size());
-			// Calculo la Average distance 
-			avgDistance = lnN/(Math.log(lnN));
-			// Calculo el coeficiente de Clustering
-			avgClustCoefficient = Math.pow(lnN, 2)/2;
+			ClusteringCoefficient cc = r.getClusteringCoefficient();
+			avgClustCoefficient = cc.getAverageClusteringCoefficient();
+			GraphDensity gd = r.getDensity();
+			GraphDistance gdis = r.getGraphDistance();
+			
+			density = gd.getDensity();
+			avgDistance = gdis.getPathLength();
+			
 			
 			// Creo el transfer estadisticas para añadirlo a la lisat de estadisticas para mas tarde hacer la media
 			Estadisticas aux = new Estadisticas(numAristas, density, largestHubDegree, avgDistance, avgClustCoefficient);
@@ -98,7 +89,7 @@ public class MainBarabasi {
 			String info = System.getProperty("line.separator") + "Simulacion numero: " + (i + 1) + " terminada";
 			panel.escribe(info);
 			frame.repaint();
-			info = "Num. Aristas: " + r.numAristas();
+			info = "Num. Aristas: " + r.getNumAristas();
 			panel.escribe(info);
 			info = "Density: " + density;
 			panel.escribe(info);
@@ -131,7 +122,7 @@ public class MainBarabasi {
 		for (Estadisticas e : estadisticas) {
 			sNumAristas += e.getNumAristas();
 			sDensity += e.getDensity();
-			sLargestHubDegree += e.getLargestHubDegree().getDegree();
+			sLargestHubDegree += e.getLargestHubDegree();
 			sAvgDistance += e.getAvgDistance();
 			sAvgClustCoefficient += e.getAvgClustCoefficient();
 		}

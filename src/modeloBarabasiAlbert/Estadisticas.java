@@ -4,12 +4,12 @@ package modeloBarabasiAlbert;
 
 public class Estadisticas {
 	private double density;
-	private Nodo largestHubDegree;
+	private int largestHubDegree;
 	private double avgDistance;
 	private double avgClustCoefficient;
 	private int numAristas;
 	
-	public Estadisticas(int numAristas, double density, Nodo largestHubDegree, double avgDistance, double avgClustCoefficient) {
+	public Estadisticas(int numAristas, double density, int largestHubDegree, double avgDistance, double avgClustCoefficient) {
 		this.setNumAristas(numAristas);
 		this.density = density;
 		this.largestHubDegree = largestHubDegree;
@@ -25,11 +25,11 @@ public class Estadisticas {
 		this.density = density;
 	}
 
-	public Nodo getLargestHubDegree() {
+	public int getLargestHubDegree() {
 		return largestHubDegree;
 	}
 
-	public void setLargestHubDegree(Nodo largestHubDegree) {
+	public void setLargestHubDegree(int largestHubDegree) {
 		this.largestHubDegree = largestHubDegree;
 	}
 

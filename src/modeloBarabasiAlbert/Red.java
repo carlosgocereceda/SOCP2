@@ -1,129 +1,144 @@
 package modeloBarabasiAlbert;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import org.gephi.graph.api.Edge;
+import org.gephi.graph.api.GraphModel;
+import org.gephi.graph.api.Node;
+import org.gephi.graph.api.UndirectedGraph;
+import org.gephi.graph.impl.GraphModelImpl;
+import org.gephi.io.exporter.api.ExportController;
+import org.gephi.statistics.plugin.ClusteringCoefficient;
+import org.gephi.statistics.plugin.ConnectedComponents;
+import org.gephi.statistics.plugin.Degree;
+import org.gephi.statistics.plugin.GraphDensity;
+import org.gephi.statistics.plugin.GraphDistance;
+import org.openide.util.Lookup;
 
 public class Red {
-	protected List<Arista> aristas;
-	//protected HashMap<Integer, Nodo> nodos;
-	protected ArrayList<Nodo> nodos;
-	protected int nodosEnLaRed = 0;
+	private GraphModel graphModel;
+	private UndirectedGraph graph;
+	private int numAristas = 0;
+	private Degree degree = null;
 	
 	public Red(int initialCapacity, int nodos) {
-		this.aristas = new ArrayList<>(initialCapacity);
-		//this.nodos = new HashMap<>();
-		this.nodos = new ArrayList<Nodo>();
-		// Inicializamos a null la lista de nodos
-		for(int i = 1; i <= nodos; i++) {
-			this.nodos.add(null);
-		}
+		this.graphModel = new GraphModelImpl();
+		this.graph = this.graphModel.getUndirectedGraph();
 		
 	}
 	
-	public int numNodos() {
-		return this.nodosEnLaRed;
-	}
-	
-	public int numAristas() {
-		return this.aristas.size();
-	}
-	
-	public boolean contains(Arista a) {
-		Nodo n1 = a.getNodo1(), n2 = a.getNodo2();
-		compruebaExistenciaNodos(a);		
-		return this.aristas.contains(new Arista(this.nodos.get(n1.getValue()), this.nodos.get(n2.getValue())));
-	}
-	
-	private void compruebaExistenciaNodos(Arista a) {
-		int nodo1 = a.getNodo1().getValue(), nodo2 = a.getNodo2().getValue();
-		if(this.nodos.get(nodo1) == null) {
-			this.nodos.set(nodo1,  new Nodo(nodo1, 0));
-			nodosEnLaRed += 1;
+	public void addArista(int n1, int n2) {
+		Node nodo1 = this.graph.getNode(Integer.toString(n1));
+		Node nodo2 = this.graph.getNode(Integer.toString(n2));
+		Edge e = graph.getEdge(nodo1, nodo2);
+		e = e == null ? graphModel.factory().newEdge(nodo1, nodo2, false) : e;
+		if (!this.graph.contains(e)) {
+			this.graph.addEdge(e);
+			this.numAristas += 1;
 		}
-		if(this.nodos.get(nodo2) == null) {
-			this.nodos.set(nodo2,  new Nodo(nodo2, 0));
-			nodosEnLaRed += 1;
-		}
-		/*if(!this.nodos.containsKey(nodo1))
-			this.nodos.put(nodo1, new Nodo(nodo1, 0));
-		if(!this.nodos.containsKey(nodo2))
-			this.nodos.put(nodo2, new Nodo(nodo2, 0));*/
+			
 	}
-	
-	public void add(Arista a) {
-		compruebaExistenciaNodos(a);
-		Nodo n1 = this.nodos.get(a.getNodo1().getValue());
-		Nodo n2 = this.nodos.get(a.getNodo2().getValue());
-		
-		n1.incrementDegree();
-		n2.incrementDegree();
-		
-		this.aristas.add(new Arista(n1, n2));
-	}
-	
-	/**
-	 * Devuelve el nodo de la red SI NO EXISTE lo creara
-	 * @param nodo Nodo de la red
-	 * @return Nodo parte de la red
-	 */
-	public Nodo getExistingNodo(int nodo) {
-		if(this.nodos.get(nodo) == null) {
-			this.nodos.set(nodo, new Nodo(nodo, 0));
-			nodosEnLaRed += 1;
-		}
-		/*if(!this.nodos.containsKey(nodo))
-			this.nodos.put(nodo, new Nodo(nodo, 0));*/
-		
-		return this.nodos.get(nodo);
-	}
-	
-	public Nodo getNodo(int nodo) {
-		return this.nodos.get(nodo);
-	}
-	
-	public List<Arista> getAristas() {
-		return aristas;
+	//Para los calculos 
+	public GraphModel getGraphModel() {
+		return this.graphModel;
 	}
 
-	public void setAristas(List<Arista> aristas) {
-		this.aristas = aristas;
+	public ClusteringCoefficient getClusteringCoefficient() {
+		ClusteringCoefficient clusteringCoefficient = new ClusteringCoefficient();
+		clusteringCoefficient.setDirected(false);
+		clusteringCoefficient.execute(this.graph);
+
+		return clusteringCoefficient;
 	}
-	public ArrayList<Nodo> getNodos(){
-		return this.nodos;
+
+	public GraphDistance getGraphDistance() {
+		GraphDistance distance = new GraphDistance();
+		distance.setDirected(false);
+		distance.execute(this.graph);
+		return distance;
 	}
-	
-	public Nodo getLargestHubDegree() {
-		int max = 0;
-		Nodo nMax = null;
+
+	public Degree getDegree() {
+		if (this.degree == null)
+			this.degree = new Degree();
+
 		
-		for(Nodo n : this.nodos) {
-			if(n != null) {
-				if(n.getDegree() > max) {
-					max = n.getDegree();
-					nMax = n;
-				}
-			}
-			
+		this.degree.execute(this.graph);
+
+		return this.degree;
+	}
+
+	public GraphDensity getDensity() {
+		GraphDensity gdensity = new GraphDensity();
+		gdensity.execute(this.graphModel);
+		return gdensity;
+	}
+
+	public ConnectedComponents getConnectedComponents() {
+		ConnectedComponents ccomp = new ConnectedComponents();
+		ccomp.execute(this.graphModel);
+		return ccomp;
+	}
+
+	public int getLargestHubDegree() {
+		if (this.degree == null)
+			this.getDegree();
+
+		UndirectedGraph uGraph = this.graphModel.getUndirectedGraph();
+		int maxDegree = 0;
+
+		for (Node n : uGraph.getNodes()) {
+			int d = uGraph.getDegree(n);
+
+			if (d > maxDegree)
+				maxDegree = d;
 		}
-		
-		return nMax;
+
+		return maxDegree;
+	}
+
+	public int getShortestHubDegree() {
+		if (this.degree == null)
+			this.getDegree();
+
+		UndirectedGraph uGraph = this.graphModel.getUndirectedGraph();
+		int minDegree = 2147483647; // Max int
+
+		for (Node n : uGraph.getNodes()) {
+			int d = uGraph.getDegree(n);
+
+			if (d < minDegree)
+				minDegree = d;
+		}
+
+		return minDegree;
 	}
 	
-	@Override
-	public String toString() {
-		String sOut = "###### NODOS ######" + System.getProperty("line.separator");
-		
-		for (Nodo n : this.nodos)
-			if(n != null) {
-				sOut += n + System.getProperty("line.separator");
-			}
-			
-		
-		sOut = "###### ARISTAS ######" + System.getProperty("line.separator");
-		
-		for (Arista a : this.aristas)
-			sOut += a + System.getProperty("line.separator");
-		
-		return sOut;
+	public int getNumAristas() {
+		return numAristas;
+	}
+
+	public void setNumAristas(int numAristas) {
+		this.numAristas = numAristas;
+	}
+
+	public void export(String pathname) {
+		// Export full graph
+		ExportController ec = Lookup.getDefault().lookup(ExportController.class);
+		try {
+			ec.exportFile(new File(pathname));
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return;
+		}
+	}
+	public void setGraphModel(GraphModel graphModel) {
+		this.graphModel = graphModel;
+	}
+	public UndirectedGraph getGraph() {
+		return graph;
+	}
+	public void setGraph(UndirectedGraph graph) {
+		this.graph = graph;
 	}
 }
