@@ -51,9 +51,7 @@ public class GenerarBarabasiAlbert {
 		Red red = this.redOriginal;
 		// Nos guardamos en la ruleta las veces que salen los nodos, para luego elegir cual cogeremos
 		Ruleta ruleta = this.ruletaOriginal;
-		System.out.println(red.getNumAristas() + " aristas");
 		for (int i = red.getGraph().getNodeCount(); i < this.T + this.m0; i++) {
-			System.out.println(red.getGraph().getNodeCount());
 			//Nodo n1 = red.getExistingNodo(i); // Nuevo nodo
 			Node n1 = red.getGraphModel().factory().newNode(Integer.toString(i));
 			red.getGraph().addNode(n1);
