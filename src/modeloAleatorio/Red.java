@@ -50,7 +50,7 @@ public class Red {
 	public ClusteringCoefficient getClusteringCoefficient() {
 		ClusteringCoefficient clusteringCoefficient = new ClusteringCoefficient();
 		clusteringCoefficient.setDirected(false);
-		clusteringCoefficient.execute(this.graph);
+		clusteringCoefficient.execute(this.graph.getModel());
 
 		return clusteringCoefficient;
 	}
