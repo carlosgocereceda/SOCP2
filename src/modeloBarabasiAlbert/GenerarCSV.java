@@ -32,7 +32,7 @@ public class GenerarCSV {
 				pw_aristas.println(a.getSource().getId() + "	" + a.getTarget().getId());
 			}
 			
-			for (int i = 1; i <= n; i++) {
+			for (int i = 1; i < n; i++) {
 				pw_nodo.println(i);
 			}
 			pw_aristas.close();
